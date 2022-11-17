@@ -41,10 +41,10 @@ ActiveRecord::Schema.define(version: 2022_11_17_140955) do
   end
 
   create_table "addresses", force: :cascade do |t|
-    t.integer "customer_id"
-    t.string "name"
-    t.string "postal_code"
-    t.string "address"
+    t.integer "customer_id", null: false
+    t.string "name", null: false
+    t.string "postal_code", null: false
+    t.string "address", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 2022_11_17_140955) do
   end
 
   create_table "genres", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
