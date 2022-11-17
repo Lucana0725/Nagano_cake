@@ -33,16 +33,16 @@ class DeviseCreateCustomers < ActiveRecord::Migration[6.1]
       # t.datetime :locked_at
 
       # customersテーブルに必要なカラムを追記(テーブル定義書より。)
-      t.string :last_name        , null: false
-      t.string :first_name       , null: false
-      t.string :last_name_kana   , null: false
-      t.string :first_name_kana  , null: false
+      t.string :last_name       , null: false
+      t.string :first_name      , null: false
+      t.string :last_name_kana  , null: false
+      t.string :first_name_kana , null: false
       # t.string :email  マイグレーションファイル作成時に最初から上で書かれているからいらない…？
       # t.string :encrypted_password  マイグレーションファイル作成時に最初から上で書かれているからいらない…？
-      t.string :postal_code      , null: false
-      t.string :address          , null: false
-      t.string :telephpone_number, null: false
-      t.boolean :is_deleted      , null: false, default: false
+      t.string :postal_code     , null: false
+      t.string :address         , null: false
+      t.string :telephone_number, null: false
+      t.boolean :is_deleted     , null: false, default: false
 
 
       t.timestamps null: false
