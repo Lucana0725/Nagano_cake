@@ -8,3 +8,26 @@
   
   <%= f.submit "新規登録" %>
 <% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>ジャンル</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!--作成された@genreたちを一覧で取得する@genres = Genre.allに対して一つ一つループで取り出す-->
+    <% @genres.each do |genre| %>
+    <tr>
+      <!--genreで取り出した一つのジャンルに対してnameを付与-->
+      <td><%= genre.name %></td>
+      <!--genreで取り出した一つのジャンルに対してeditへのリンクを付与(リンクに:idが入るため引数にidが必要)-->
+      <td>
+        <%= link_to edit_admin_genre_path(genre.id) do %>
+          編集する
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
