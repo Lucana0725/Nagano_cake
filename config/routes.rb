@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    # get 'genres/index'
+    # get 'genres/create'
+    # get 'genres/edit'
+    # get 'genres/update'
+    resources :genres, only:[:index, :create, :edit, :update]
+  end
   # デフォルトのルーティングは削除(参考：https://nllllll.com/ruby-on-rails/rails-devise/)
   # devise_for :admins
   # devise_for :customers
