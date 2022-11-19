@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    # get 'genres/index'
+    # get 'genres/create'
+    # get 'genres/edit'
+    # get 'genres/update'
+    resources :genres, only:[:index, :create, :edit, :update]
+  end
   # デフォルトのルーティングは削除(参考：https://nllllll.com/ruby-on-rails/rails-devise/)
   # devise_for :admins
   # devise_for :customers
@@ -18,5 +25,7 @@ Rails.application.routes.draw do
   
   # get '/public/top' => 'public/homes#top'
   root to: 'public/homes#top'
+  get 'about' => 'public/homes#about'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get '/admin' => 'admin/homes#top'
 end
