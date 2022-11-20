@@ -1,2 +1,27 @@
-<h1>Admin::Items#edit</h1>
-<p>Find me in app/views/admin/items/edit.html.erb</p>
+<!--<h1>Admin::Items#edit</h1>-->
+<!--<p>Find me in app/views/admin/items/edit.html.erb</p>-->
+<h2>商品編集</h2>
+
+<%= form_with model: @item, url: admin_item_path, method: :patch do |f| %>
+  <div>
+    <%= f.label :image, "商品画像" %>
+    <%= f.file_field :image, accept: "image/*" %>
+  </div>
+  <div>
+    <%= f.label :name, "商品名" %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :introduction, "商品説明" %>
+    <%= f.text_area :introduction %>
+  </div>
+  <div>
+    <%= f.label :price, "税抜価格" %>
+    <%= f.text_field :price %>
+  </div>
+  
+  <div>
+    <%= f.submit "変更を" %>
+  </div>
+  
+<% end %>
