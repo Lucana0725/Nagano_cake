@@ -11,4 +11,9 @@ class Item < ApplicationRecord
     end
     image
   end
+  
+  def get_tax_in_price
+    tax_in_price = price * 1.1
+    return tax_in_price
+  end
 end

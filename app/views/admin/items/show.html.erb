@@ -6,4 +6,4 @@
 <%= image_tag @item.get_item_image %>
 <p>商品名 <%= @item.name %></p>
 <P>商品説明 <%= @item.introduction %></P>
-<p>税込み価格 <%= @item.price %> 円</p>
+<p>税込み価格 <%= @item.get_tax_in_price %> (<%= @item.price %>) 円</p>
