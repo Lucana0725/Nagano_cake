@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(version: 2022_11_19_071017) do
   end
 
   create_table "items", force: :cascade do |t|
-    t.integer "genre_id", null: false
+    t.integer "genre_id"
     t.string "name", null: false
     t.text "introduction", null: false
     t.integer "price", null: false
