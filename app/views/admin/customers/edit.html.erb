@@ -1,0 +1,35 @@
+<h2>
+  <%= @customer.last_name + @customer.first_name %>さんの会員情報編集
+</h2>
+<p>会員ID<%= @customer.id %></p>
+
+<%= form_with model: @customer, url: admin_customer_path, method: :patch do |f| %>
+  <div>
+    <%= f.label :name, "氏名" %>
+    <%= f.text_field :last_name, :placeholder => "姓" %>
+    <%= f.text_field :first_name, :placeholder => "名" %>
+  </div>
+  <div>
+    <%= f.label :name, "フリガナ" %>
+    <%= f.text_field :last_name_kana, :placeholder => "セイ" %>
+    <%= f.text_field :first_name_kana, :placeholder => "メイ" %>
+  </div>
+  <div>
+    <%= f.label :postal_code, "郵便番号" %>
+    <%= f.text_field :postal_code, :placeholder => "1500041" %>
+  </div>
+  <div>
+    <%= f.label :address, "住所" %>
+    <%= f.text_field :address, :placeholder => "東京都渋谷区神南１丁目１９−１１ パークウェースクエア2 4階" %>
+  </div>
+  <div>
+    <%= f.label :telephone_number, "電話番号" %>
+    <%= f.text_field :telephone_number, :placeholder => "0368694700" %>
+  </div>
+  <div>
+    <%= f.label :email, "メールアドレス" %>
+    <%= f.text_field :email, :placeholder => "hoge@example.com" %>
+  </div>
+
+  <%= f.submit "変更を保存" %>
+<% end %>

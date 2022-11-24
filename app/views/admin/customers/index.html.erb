@@ -1,0 +1,32 @@
+<h2>会員一覧</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>会員ID</th>
+      <th>氏名</th>
+      <th>メールアドレス</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @customers.each do |customer| %>
+    <tr>
+      <!--会員ID-->
+      <td>
+        <%= customer.id %>
+      </td>
+      <!--氏名-->
+      <td>
+        <%= link_to admin_customer_path(customer.id) do %>
+        <!--氏名は名字と下の名前で分けて登録しているので、連結させる-->
+          <%= customer.last_name + customer.first_name %>
+        <% end %>
+      </td>
+      <!--メールアドレス-->
+      <td>
+        <%= customer.email %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
