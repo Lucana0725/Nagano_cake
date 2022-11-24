@@ -21,20 +21,20 @@ Rails.application.routes.draw do
   # デフォルトのルーティングは削除(参考：https://nllllll.com/ruby-on-rails/rails-devise/)
   # devise_for :admins
   # devise_for :customers
-  
+
   # 顧客用
   # URL /customers/sign_in ...
   devise_for :customers,skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: "public/sessions"
   }
-  
+
   # 管理者用
   # URL /admins/sign_in ...
   devise_for :admin,skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
-  
+
   # get '/public/top' => 'public/homes#top'
   root to: 'public/homes#top'
   get 'about' => 'public/homes#about'
