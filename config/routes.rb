@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  scope module: :public do
+    # get 'customers/show'
+    # get 'customers/edit'
+    # get 'customers/update'
+    resources :customers, only:[:show, :edit, :update]
+    get 'customers/unsubscribe' => "public/customers#unsubscribe", as: "unsubscribe"
+    get 'customers/withdrawal' => "public/customers#withdrawal", as: "withdrawal"
+    
+  end
   namespace :admin do
     resources :customers, only:[:index, :show, :edit, :update]
   end
