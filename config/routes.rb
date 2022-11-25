@@ -4,8 +4,8 @@ Rails.application.routes.draw do
     # get 'customers/edit'
     # get 'customers/update'
     resources :customers, only:[:show, :edit, :update]
-    get 'customers/unsubscribe' => "public/customers#unsubscribe", as: "unsubscribe"
-    get 'customers/withdrawal' => "public/customers#withdrawal", as: "withdrawal"
+    get 'customers/unsubscribe' => "customers#unsubscribe", as: "unsubscribe"
+    get 'customers/withdrawal' => "customers#withdrawal", as: "withdrawal"
     
   end
   namespace :admin do
