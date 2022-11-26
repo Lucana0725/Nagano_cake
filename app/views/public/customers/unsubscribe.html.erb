@@ -4,6 +4,6 @@
 <p>退会する場合は、「退会する」をクリックしてください。</p>
 
 <%= link_to "退会しない", edit_customer_path(current_customer.id) %>
-<%= form_with model: @customer, url: withdrawal_path, method: :patch do |f| %>
+<%= form_with model: @customer, url: withdrawal_path, method: :delete do |f| %>
   <%= f.submit "退会する" %>
 <% end %>
