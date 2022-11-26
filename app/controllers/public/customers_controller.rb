@@ -14,14 +14,19 @@ class Public::CustomersController < ApplicationController
   end
 
   def unsubscribe
+    # @customer = Customer.find(params[:id])
+    @customer = Customer.find(current_customer.id)
   end
 
   def withdrawal
     # @customer = Customer.find(params[:id])
     @customer = Customer.find(current_customer.id)
-    if @customer.is_deleted = false
-      return @customer.is_deleted = true
-    end
+    # if @customer.is_deleted = false
+    #   return @customer.is_deleted = true
+    # end
+    @customer.update(is_deleted: true)
+    reset_session
+    redirect_to root_path
   end
 
 
