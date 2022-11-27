@@ -10,8 +10,8 @@
     <!--itemのidを渡していないと飛び先がわからないため-->
     <%= link_to item_path(item.id) do %>
       <%= image_tag item.get_item_image(300, 300) %><br/>
+      <%= item.name %><br/>
     <% end %>
-    <%= item.name %><br/>
     ￥<%= item.price%><br/>
   </div>
 <% end %>
