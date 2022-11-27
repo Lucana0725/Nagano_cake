@@ -43,6 +43,12 @@ Rails.application.routes.draw do
     patch 'customers/withdrawal' => "customers#withdrawal", as: "withdrawal"
     resources :customers, only:[:show, :edit, :update]
   end
+  
+  scope module: :public do
+    # get 'items/index'
+    # get 'items/show'
+    resources :items, only:[:index, :show]
+  end
 
   # get '/public/top' => 'public/homes#top'
   root to: 'public/homes#top'

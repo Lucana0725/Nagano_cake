@@ -4,12 +4,12 @@ class Item < ApplicationRecord
   
   has_one_attached :image
   
-  def get_item_image
+  def get_item_image(width, height)
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no-image.jpg')
       image.attached(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
-    image
+    image.variant(resize_to_limit: [width, height]).processed
   end
   
   # 商品詳細ページ(show)で消費税込み価格を表示させるためのメソッド
