@@ -1,0 +1,15 @@
+<!--% @items.each do |item| %>-->
+<!--  <h2>商品一覧（全%= item.count %>件）</h2>-->
+<!--% end %>-->
+<!--<h2>商品一覧（全%= @items.count %>件）</h2>-->
+<h2>商品一覧（全○○件）</h2>
+<% @items.each do |item| %>
+  <div>
+    <!--itemのidを渡していないと飛び先がわからないため-->
+    <%= link_to item_path(item.id) do %>
+      <%= image_tag item.get_item_image(300, 300) %><br/>
+      <%= item.name %><br/>
+    <% end %>
+    ￥<%= item.price%><br/>
+  </div>
+<% end %>
