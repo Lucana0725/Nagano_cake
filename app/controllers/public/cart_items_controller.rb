@@ -14,7 +14,7 @@ class Public::CartItemsController < ApplicationController
 
   def create
     @cart_item = CartItem.new(cart_item_params)
-    # binding.pry
+    binding.pry
     @cart_item.save
     redirect_to cart_items_path
   end
