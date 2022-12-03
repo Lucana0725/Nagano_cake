@@ -1,7 +1,7 @@
 <h2>商品詳細</h2>
 
 <!--items_controllerで定義した@itemに、画像表示のget_item_imageと以下表示させたいカラムを渡す-->
-<%= image_tag @item.get_item_image %>
+<%= image_tag @item.get_item_image(300, 300) %>
 <p>商品名 <%= @item.name %></p>
 <P>商品説明 <%= @item.introduction %></P>
 <p>ジャンル <%= @item.genre.name %></p>
