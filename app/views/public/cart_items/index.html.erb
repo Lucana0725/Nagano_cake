@@ -32,6 +32,15 @@
       <!--<td>%= (cart_item.item.get_tax_in_price) * (cart_item.amount) %></td>-->
       <td><%= cart_item.get_subtotal_price %></td>
       
+      <!--削除-->
+      <td>
+        <!--削除するためにフォームを送信する必要があるので、form_with。each文の中に入れることで繰り返し出してこれる。-->
+        <!--送信先のURLはdestroyがあるcart_item_path。そしてどのレコード(商品)を削除するのか判別する必要があるので引数にcart_item.idが-->
+        <%= form_with model: @cart_item, url: cart_item_path(cart_item.id), method: :delete do |f| %>
+          <%= f.submit "削除", "data-confirm" => "削除します。よろしいですか？" %>
+        <% end %>
+      </td>
+      
       <!--合計金額-->
       <!--ここではあくまで計算しているだけで表示は行わない-->
       <td><% @total_price += cart_item.get_subtotal_price %></td>
