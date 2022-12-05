@@ -29,8 +29,16 @@
       <!--<td>cart_item.item.name</td>-->
       
       <!--小計-->
-      <td><%= (cart_item.item.get_tax_in_price) * (cart_item.amount) %></td>
+      <!--<td>%= (cart_item.item.get_tax_in_price) * (cart_item.amount) %></td>-->
+      <td><%= cart_item.get_subtotal_price %></td>
+      
+      <!--合計金額-->
+      <!--ここではあくまで計算しているだけで表示は行わない-->
+      <td><% @total_price += cart_item.get_subtotal_price %></td>
     </tr>
     <% end %>
   </tbody>
 </table>
+
+<!--each文の外に書くことで上で計算した内容を表示できる-->
+<p>合計金額：<%= @total_price %></p>

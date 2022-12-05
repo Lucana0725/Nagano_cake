@@ -1,6 +1,9 @@
 class Public::CartItemsController < ApplicationController
   def index
     @cart_items = CartItem.all
+
+    # 計算結果を保持する変数だから0で初期化する
+    @total_price = 0
   end
 
   def update
