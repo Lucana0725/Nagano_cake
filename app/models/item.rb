@@ -14,8 +14,13 @@ class Item < ApplicationRecord
   
   # 商品詳細ページ(show)で消費税込み価格を表示させるためのメソッド
   # 参考：https://teratail.com/questions/300068
+  # def get_tax_in_price
+  #   tax_in_price = price * 1.1
+  #   return tax_in_price.floor
+  # end
+  
+  # 上と同じ処理。
   def get_tax_in_price
-    tax_in_price = price * 1.1
-    return tax_in_price.floor
+    (price * 1.1).floor
   end
 end
