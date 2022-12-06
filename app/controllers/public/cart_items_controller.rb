@@ -36,8 +36,26 @@ class Public::CartItemsController < ApplicationController
 
     # binding.pry
 
-    @cart_item.save!
-    redirect_to cart_items_path
+
+    # if Item.find_by(name: params[:name])
+    # if CartItem.find_by(item_id: params[:item_id])
+
+    # 既にカートに存在する商品(existed_item)を定義する。
+    # 定義内容：カート内商品のidと、アソシエーションを結んでいるcustomerのidで判別するため。
+    existed_item = CartItem.find_by(item_id: @cart_item.item_id, customer_id: current_customer.id)
+    # binding.pry
+
+    if existed_item  # カートに商品が存在したら
+      new_amount = existed_item.amount + @cart_item.amount  # すでにある商品の数量に、フォームから飛んできたデータ(数量)を足し合わせ、それをnew_amountという変数で保持
+      existed_item.update!(amount: new_amount)  # すでにある商品(existed_item)を更新。（amountカラムを、足し合わせた数量(new_amount)で更新）
+      redirect_to cart_items_path
+    else
+      @cart_item.save!
+      redirect_to cart_items_path
+    end
+    # 以下if文追記前元の記述
+    # @cart_item.save!
+    # redirect_to cart_items_path
   end
 
 
