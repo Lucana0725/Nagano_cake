@@ -14,6 +14,8 @@
     <header>
       <% if customer_signed_in? %>
       <!--<p>ようこそ、ヤマダさん！</p>-->
+      <!--<p>ようこそ、%= customer.last_name(current_customer) %>さん！</p>-->
+      <p>ようこそ、<%= current_customer.last_name %>さん！</p>
         <li>
           <!--マイページ-->
           <%= link_to "マイページ", customers_my_page_path %>
