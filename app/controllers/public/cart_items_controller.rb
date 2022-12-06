@@ -1,6 +1,11 @@
 class Public::CartItemsController < ApplicationController
   def index
-    @cart_items = CartItem.all
+    # @cart_items = CartItem.all
+    # 「current_customer」の「cart_items」を取得する という考え方
+    # ユーザーごとのcart_itemsを取ってくるのに、cart_itemとcustomerはアソシエーションを結んでいるので、
+    # CartItemというモデル名を指定するのではなく、cart_itemsというテーブル名を指定する
+    @cart_items = current_customer.cart_items
+    # @cart_items.customer_id = current_customer.id
 
     # 計算結果を保持する変数だから0で初期化する
     @total_price = 0
@@ -16,6 +21,8 @@ class Public::CartItemsController < ApplicationController
   end
 
   def destroy_all
+    @cart_items = CartItem.all
+    @cart_items.destroy_all
   end
 
   def create
