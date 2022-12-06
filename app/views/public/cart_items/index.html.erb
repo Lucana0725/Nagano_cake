@@ -2,6 +2,10 @@
 <!--<p>Find me in app/views/public/cart_items/index.html.erb</p>-->
 <h2>ショッピングカート</h2>
 
+<%= form_with model: @cart_item, url: destroy_all_path, method: :delete do |f| %>
+  <%= f.submit "カートを空にする", "data-confirm" => "カートを空にします。よろしいですか？" %>
+<% end %>
+
 <table>
   <thead>
     <tr>
