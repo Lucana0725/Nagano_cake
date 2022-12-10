@@ -22,27 +22,26 @@
       <!--<td>%= cart_item.item.id %></td>-->
       <!--商品名-->
       <td><%= cart_item.item.name %></td>
-      
+
       <!--税込み価格-->
       <td><%= cart_item.item.get_tax_in_price %></td>
       <!--<td>%= (cart_item.item.price * 1.1).to_i %></td>  上の行と効果は同じ。こちらはモデルで計算用のメソッドを持たせなくて良い記述-->
-      
+
       <!--数量-->
       <!--<td>%= cart_item.amount %></td>-->
-      <%= form_with model: @cart_item, url: cart_item_path(cart_item.id), method: :patch do |f| %>
+      <%= form_with model: cart_item, url: cart_item_path(cart_item.id), method: :patch do |f| %>  <!--modelにわたすのはブロック変数のcart_item（each do ~ endの中に記述しているということと、変更(edit~update)する際に欲しい情報はnewではなく既存のデータ(@cart_items)）だから-->
         <td>
           <%= f.select :amount, *[1..20], :include_blank => cart_item.amount %>
           <%= f.submit "変更" %>
         </td>
-        
       <% end %>
-      
+
       <!--<td>cart_item.item.name</td>-->
-      
+
       <!--小計-->
       <!--<td>%= (cart_item.item.get_tax_in_price) * (cart_item.amount) %></td>-->
       <td><%= cart_item.get_subtotal_price %></td>
-      
+
       <!--削除-->
       <td>
         <!--削除するためにフォームを送信する必要があるので、form_with。each文の中に入れることで繰り返し出してこれる。-->
@@ -51,7 +50,7 @@
           <%= f.submit "削除", "data-confirm" => "削除します。よろしいですか？" %>
         <% end %>
       </td>
-      
+
       <!--合計金額-->
       <!--ここではあくまで計算しているだけで表示は行わない-->
       <td><% @total_price += cart_item.get_subtotal_price %></td>
