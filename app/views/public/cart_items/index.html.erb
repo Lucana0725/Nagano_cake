@@ -28,7 +28,14 @@
       <!--<td>%= (cart_item.item.price * 1.1).to_i %></td>  上の行と効果は同じ。こちらはモデルで計算用のメソッドを持たせなくて良い記述-->
       
       <!--数量-->
-      <td><%= cart_item.amount %></td>
+      <!--<td>%= cart_item.amount %></td>-->
+      <%= form_with model: @cart_item, url: cart_item_path(cart_item.id), method: :patch do |f| %>
+        <td>
+          <%= f.select :amount, *[1..20], :include_blank => cart_item.amount %>
+          <%= f.submit "変更" %>
+        </td>
+        
+      <% end %>
       
       <!--<td>cart_item.item.name</td>-->
       
