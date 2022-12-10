@@ -41,13 +41,24 @@ Rails.application.routes.draw do
     # get 'customers/update'
     get 'customers/unsubscribe' => "customers#unsubscribe", as: "unsubscribe"
     patch 'customers/withdrawal' => "customers#withdrawal", as: "withdrawal"
-    resources :customers, only:[:show, :edit, :update]
+    get 'customers/' => 'customers#show', as: "customers_my_page"
+    get 'customers/information/edit' => 'customers#edit', as: "customer_edit"
+    patch 'customers/information' => 'customers#update', as: "customers"
   end
   
   scope module: :public do
     # get 'items/index'
     # get 'items/show'
     resources :items, only:[:index, :show]
+  end
+  
+  scope module: :public do
+    # get 'cart_items/index'
+    # get 'cart_items/update'
+    # get 'cart_items/destroy'
+    # get 'cart_items/create'
+    delete 'cart_items/destroy_all' => 'cart_items#destroy_all', as: "destroy_all"
+    resources :cart_items, only:[:index, :update, :destroy, :create]
   end
 
   # get '/public/top' => 'public/homes#top'

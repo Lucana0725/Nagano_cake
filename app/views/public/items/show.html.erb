@@ -4,4 +4,16 @@
 <h2><%= @item.name %></h2>
 <p><%= @item.introduction %></p>
 <p>￥<%= @item.get_tax_in_price %>(税込み)</p>
+
 <!--%= link_to "カートに入れる",  %>-->
+<!--%= form_with model: @item_new do |f| %>-->
+<%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
+  <!--%= f.select :amount, options_for_select(["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], {selected: cart_items.amount.to_i} ) %>-->
+  <!--%= f.select :amount, [["1", 1], ["2", "2"]], :include_blank => "選択して下さい" %>-->
+  
+  <!--送りたいものは商品情報なので商品のID(@item.id)と数量-->
+  <!--:item_id => @cart_itemのitem_idカラム。 @item.id => 商品情報(Item)のID（CartItemとItemにはアソシエーションが結ばれている）-->
+  <%= f.hidden_field :item_id, :value => @item.id %>
+  <%= f.select :amount, *[1..20], :include_blank => "選択して下さい" %>
+  <%= f.submit "カートに入れる" %>
+<% end %>

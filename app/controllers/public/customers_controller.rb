@@ -1,26 +1,28 @@
 class Public::CustomersController < ApplicationController
   def show
-    @customer = Customer.find(params[:id])
+    # @customer = Customer.find(params[:id])
+    @customer = current_customer
   end
 
   def edit
-    @customer = Customer.find(params[:id])
+    # @customer = Customer.find(params[:id])
+    @customer = current_customer
   end
 
   def update
-    @customer = Customer.find(params[:id])
+    @customer = current_customer
     @customer.update!(customer_params)
-    redirect_to customer_path
+    redirect_to customers_my_page_path
   end
 
   def unsubscribe
     # @customer = Customer.find(params[:id])
-    @customer = Customer.find(current_customer.id)
+    @customer = current_customer
   end
 
   def withdrawal
     # @customer = Customer.find(params[:id])
-    @customer = Customer.find(current_customer.id)
+    @customer = current_customer
     # if @customer.is_deleted = false
     #   return @customer.is_deleted = true
     # end
