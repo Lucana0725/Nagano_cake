@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   devise_for :admin,skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
-  
+
   scope module: :public do
     # get 'customers/show'
     # get 'customers/edit'
@@ -45,13 +45,13 @@ Rails.application.routes.draw do
     get 'customers/information/edit' => 'customers#edit', as: "customer_edit"
     patch 'customers/information' => 'customers#update', as: "customers"
   end
-  
+
   scope module: :public do
     # get 'items/index'
     # get 'items/show'
     resources :items, only:[:index, :show]
   end
-  
+
   scope module: :public do
     # get 'cart_items/index'
     # get 'cart_items/update'
