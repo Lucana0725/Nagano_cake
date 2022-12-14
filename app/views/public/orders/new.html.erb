@@ -14,18 +14,22 @@
   <%= f.label :payment_method_transfer, Order.payment_methods_i18n[:transfer] %>
 
   <h3>お届け先</h3>
-  <%= f.radio_button :address, current_customer.addresses %>
+  <!--%= f.radio_button :address, current_customer.addresses %>-->
+  <%= f.radio_button :address_flag, 0 %>
   <%= f.label :address, "ご自身の住所" %></br>
   <!--%= f.label :address, current_customer.addresses.address_display %>-->
   <%= f.label :address, "#{current_customer.postal_code}#{current_customer.address}" %></br>
-  
+
   <!--%= f.radio_button :address, %>-->
   <%= f.label :address, "登録済みの住所" %></br>
   <!--%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :address_display) %>-->
   <!--%= f.collection_select :address_id, Address.all, :id, :address_display %>-->
   <!--上下で内容は一緒。ただ、Address.allとすると他のユーザーの配送先も取得してしまうため、現在ログインしているユーザーの住所だけを取ってくる必要がある-->
   <!--そのため、current_customer.addresses とする必要がある(=addressesというのは、Customerがhas_many :addressesなので、アソシエーションを結んでいるからaddressesという書き方ができる。)-->
+  <%= f.radio_button :address_flag, 1 %>
   <%= f.collection_select :address_id, current_customer.addresses, :id, :address_display %>
+
+  <%= f.submit 'press' %>
 
   <!--%= f.submit "確認画面へ進む" %>-->
 <% end %>
