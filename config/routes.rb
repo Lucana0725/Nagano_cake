@@ -62,7 +62,7 @@ Rails.application.routes.draw do
   end
   
   scope module: :public do
-    get 'orders/check' => 'orders#check', as: "orders_check"
+    get 'orders/confirm' => 'orders#confirm', as: "orders_confirm"
     get 'orders/finish' => 'orders#finish', as: "orders_finish"
     get 'orders/show' => 'orders#show', as: "orders_show"
     resources :orders, only:[:new, :create, :index]

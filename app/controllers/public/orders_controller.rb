@@ -3,8 +3,8 @@ class Public::OrdersController < ApplicationController
     @order = Order.new
   end
 
-  def check
-    byebug
+  def confirm
+    # byebug
     @order = Order.new
     if params[:order][:address_flag] == 0.to_s
       @order.name = current_customer.last_name + current_customer.first_name

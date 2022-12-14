@@ -1,5 +1,5 @@
 <h2>注文情報入力</h2>
-<%= form_with model: @order, url: orders_check_path, method: :get do |f| %>
+<%= form_with model: @order, url: orders_confirm_path, method: :get do |f| %>
   <h3>支払方法</h3>
   <!--formの中でラベルを付けてラジオボタンを表示する方法-->
   <!--%= f.radio_button :payment_method, "credit_card" %>-->
