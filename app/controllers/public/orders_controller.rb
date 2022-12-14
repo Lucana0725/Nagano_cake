@@ -4,10 +4,10 @@ class Public::OrdersController < ApplicationController
   end
 
   def check
-    # byebug
+    byebug
     @order = Order.new
     if params[:order][:address_flag] == 0.to_s
-      @order.name = current_cutomer.last_name
+      @order.name = current_customer.last_name + current_customer.first_name
       @order.address = current_customer.address
       @order.postal_code = current_customer.postal_code
     elsif params[:order][:address_flag] == 1.to_s
@@ -33,6 +33,6 @@ class Public::OrdersController < ApplicationController
 
   private
   def order_params
-    params.require(order).permit(:name)
+    params.require(:order).permit(:name)
   end
 end
