@@ -4,8 +4,9 @@ class Public::OrdersController < ApplicationController
   end
 
   def confirm
-    @order = Order.new(order_params)  # ストロングパラメーターから各情報(フォームから送られてきた:postal_code, :address, :name)が送られ、それが@orderに代入される
+    @order = Order.new(order_params)  # ストロングパラメーターから各情報(フォームから送られてきた:postal_code, :address, :name)が送られ、それが@orderに代入される。
     # binding.pry
+    # byebug
     if params[:order][:address_flag] == 0.to_s
       @order.name = current_customer.last_name + current_customer.first_name
       @order.address = current_customer.address
