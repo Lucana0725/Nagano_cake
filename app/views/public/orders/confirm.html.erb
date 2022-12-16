@@ -12,9 +12,26 @@
     <tbody>
       <% @cart_items.each do |cart_item| %>
       <tr>
-        <td><%= cart_item.name %></td>
+        <td><%= cart_item.item.name %></td>  <!--CartItemはItemとアソシエーションを結んでいるので、カート内商品の各情報が欲しければ.itemとする必要がある-->
+        <td><%= cart_item.item.get_tax_in_price %></td>
+        <td><%= cart_item.amount %></td>  <!--amountはCartItemで定義しているので.itemとする必要はない。-->
+        <td><%= cart_item.get_subtotal_price %></td>  <!--amountと同様-->
       </tr>
       <% end %>
     </tbody>
   </thead>
+</table>
+<table>
+  <tr>
+    <th>送料</th>
+    <td>a</td>
+  </tr>
+  <tr>
+    <th>商品合計</th>
+    <td>b</td>
+  </tr>
+  <tr>
+    <th>請求金額</th>
+    <td>c</td>
+  </tr>
 </table>

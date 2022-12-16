@@ -7,6 +7,8 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)  # ストロングパラメーターから各情報(フォームから送られてきた:postal_code, :address, :name)が送られ、それが@orderに代入される。
     # binding.pry
     # byebug
+    # @cart_items = CartItem.find(params[:id])
+    @cart_items = CartItem.all  # カート内商品を表示したいので、ここでも@cart_itemsを定義する必要がある。全ての情報がほしいので@cart_items = CartItem.
     if params[:order][:address_flag] == 0.to_s
       @order.name = current_customer.last_name + current_customer.first_name
       @order.address = current_customer.address
