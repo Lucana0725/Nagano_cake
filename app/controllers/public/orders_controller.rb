@@ -8,7 +8,8 @@ class Public::OrdersController < ApplicationController
     # binding.pry
     # byebug
     # @cart_items = CartItem.find(params[:id])
-    @cart_items = CartItem.all  # カート内商品を表示したいので、ここでも@cart_itemsを定義する必要がある。全ての情報がほしいので@cart_items = CartItem.
+    # @cart_items = CartItem.all  # カート内商品を表示したいので、ここでも@cart_itemsを定義する必要がある。全ての情報がほしいので@cart_items = CartItem.all
+    @cart_items = current_customer.cart_items
     if params[:order][:address_flag] == 0.to_s
       @order.name = current_customer.last_name + current_customer.first_name
       @order.address = current_customer.address
