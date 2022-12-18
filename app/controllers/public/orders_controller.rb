@@ -5,6 +5,7 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     @order = Order.new(order_params)  # ストロングパラメーターから各情報(フォームから送られてきた:postal_code, :address, :name)が送られ、それが@orderに代入される。
+    @total_price = 0
     # binding.pry
     # byebug
     # @cart_items = CartItem.find(params[:id])
