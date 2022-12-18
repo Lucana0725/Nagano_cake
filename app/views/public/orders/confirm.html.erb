@@ -37,4 +37,20 @@
   </tr>
 </table>
 
-<p>注文を確定する</p>
+<h3>支払方法</h3>
+<%= @order.payment_method_i18n %>
+
+<h3>お届け先</h3>
+<%= @order.address %>
+  
+<%= form_with model: @order, url: orders_path, method: :post do |f| %>
+  <%= f.hidden_field :customer_id, :value => current_customer.id %>
+  <%= f.hidden_field :postal_code, :value => current_customer.postal_code %>
+  <%= f.hidden_field :address, :value => current_customer.address %>
+  <%= f.hidden_field :name, :value => @order.name %>
+  <%= f.hidden_field :postage, :value => @order.show_postage %>
+  <%= f.hidden_field :total_payment, :value => @total_price %>
+  <%= f.hidden_field :payment_method, :value => @order.payment_method %>
+  
+  <%= f.submit "注文を確定する" %>
+<% end %>

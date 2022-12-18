@@ -24,10 +24,12 @@ class Public::OrdersController < ApplicationController
     end
   end
 
-  def finish
+  def create
+    # byebug
+    @order = Order.find(params[:id])
   end
 
-  def create
+  def finish
   end
 
   def index
