@@ -25,8 +25,10 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
-    # byebug
-    @order = Order.find(params[:id])
+    byebug
+    @order = Order.new(order_create_params)
+    @order.save!
+    @order_detail = OrderDetail.new()
   end
 
   def finish
@@ -43,6 +45,10 @@ class Public::OrdersController < ApplicationController
   # 「新しい住所」で入力された内容(:posta_code, :address, :name)がフォームで送信されたらここが受け取る。
   # それをconfirmアクションの@order = Order.new(order_params)の引数の部分で自動的に入力、振り分けられる
   def order_params
-    params.require(:order).permit(:payment_method, :postal_code, :address,:name)
+    params.require(:order).permit(:payment_method, :postal_code, :address, :name)
+  end
+  
+  def order_create_params
+    params.require(:order).permit(:customer_id, :postal_code, :address, :name, :postage, :total_payment, :payment_method)
   end
 end
