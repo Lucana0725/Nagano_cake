@@ -38,10 +38,10 @@ class Public::OrdersController < ApplicationController
       @order_detail.save
     end
     @cart_items.destroy_all
-    redirect_to orders_finish_path
+    redirect_to orders_thanks_path
   end
 
-  def finish
+  def thanks
   end
 
   def index
