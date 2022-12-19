@@ -49,10 +49,14 @@ class Public::OrdersController < ApplicationController
   def index
     @orders = Order.all
     @order_detial = OrderDetail.all
-    @cart_items = current_customer.cart_items
   end
 
   def show
+    # @order_detail = OrderDetail.find(params[:order][:id])
+    # byebug
+    @order = Order.find(params[:id])
+    # @order_detail = OrderDetail.find(params[:id])
+    @ordered_total_price = 0
   end
 
   private
