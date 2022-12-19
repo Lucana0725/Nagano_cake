@@ -31,7 +31,7 @@ class Public::OrdersController < ApplicationController
     @cart_items = current_customer.cart_items  # 参照するのは現在ログインしているcustomerのカート内商品のみ。
     @cart_items.each do |cart_item|  # カート内商品を一つずつ取り出して、
       @order_detail = OrderDetail.new  # OrderDetailモデルの空のインスタンスを作成し、
-      
+
       # 以下、OrderDetailモデルのカラムに必要な情報を入れていってあげる
       @order_detail.order_id = @order.id
       @order_detail.item_id = cart_item.item.id
