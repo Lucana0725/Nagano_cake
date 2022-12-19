@@ -28,14 +28,16 @@ class Public::OrdersController < ApplicationController
     # byebug
     @order = Order.new(order_create_params)
     @order.save
-    @cart_items = current_customer.cart_items
-    @cart_items.each do |cart_item|
-      @order_detail = OrderDetail.new
+    @cart_items = current_customer.cart_items  # 参照するのは現在ログインしているcustomerのカート内商品のみ。
+    @cart_items.each do |cart_item|  # カート内商品を一つずつ取り出して、
+      @order_detail = OrderDetail.new  # OrderDetailモデルの空のインスタンスを作成し、
+      
+      # 以下、OrderDetailモデルのカラムに必要な情報を入れていってあげる
       @order_detail.order_id = @order.id
       @order_detail.item_id = cart_item.item.id
       @order_detail.price_with_tax = cart_item.item.get_tax_in_price
       @order_detail.amount = cart_item.amount
-      @order_detail.save
+      @order_detail.save  # OrderDetailモデルに保存。ここまでが一つのカート内商品に対して起こり、カート内商品全てに適用するまで続く(each)
     end
     @cart_items.destroy_all
     redirect_to orders_thanks_path
@@ -45,6 +47,9 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
+    @orders = Order.all
+    @order_detial = OrderDetail.all
+    @cart_items = current_customer.cart_items
   end
 
   def show
