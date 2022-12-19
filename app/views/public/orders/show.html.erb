@@ -1,2 +1,25 @@
-<h1>Public::Orders#show</h1>
-<p>Find me in app/views/public/orders/show.html.erb</p>
+<h2>注文履歴詳細</h2>
+
+<h3>注文情報</h3>
+<table>
+  <tr>
+    <th>注文日</th>
+    <td><%= @order.created_at.strftime('%Y/%d/%d') %></td>
+  </tr>
+  <tr>
+    <th>配送先</th>
+    <td></td>
+  </tr>
+  <tr>
+    <th>支払方法</th>
+    <td></td>
+  </tr>
+  <tr>
+    <th>ステータス</th>
+    <td></td>
+  </tr>
+</table>
+
+<h3>請求情報</h3>
+
+<h3>注文内容</h3>
