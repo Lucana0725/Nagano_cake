@@ -25,10 +25,20 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
-    byebug
+    # byebug
     @order = Order.new(order_create_params)
-    @order.save!
-    @order_detail = OrderDetail.new()
+    @order.save
+    @cart_items = current_customer.cart_items
+    @cart_items.each do |cart_item|
+      @order_detail = OrderDetail.new
+      @order_detail.order_id = @order.id
+      @order_detail.item_id = cart_item.item.id
+      @order_detail.price_with_tax = cart_item.item.get_tax_in_price
+      @order_detail.amount = cart_item.amount
+      @order_detail.save
+    end
+    @cart_items.destroy_all
+    redirect_to orders_finish_path
   end
 
   def finish
@@ -47,7 +57,7 @@ class Public::OrdersController < ApplicationController
   def order_params
     params.require(:order).permit(:payment_method, :postal_code, :address, :name)
   end
-  
+
   def order_create_params
     params.require(:order).permit(:customer_id, :postal_code, :address, :name, :postage, :total_payment, :payment_method)
   end
