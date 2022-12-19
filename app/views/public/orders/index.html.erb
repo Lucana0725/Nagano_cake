@@ -18,8 +18,12 @@
       <td><%= order.created_at %></td>
 
       <!--配送先-->
-      <td><%= order.address %></td>
-
+      <td>
+        〒<%= order.postal_code %>
+        <%= order.address %>
+        <%= order.name %>
+      </td>
+      
       <!--注文商品-->
       <td></td>
 
