@@ -60,6 +60,13 @@ Rails.application.routes.draw do
     delete 'cart_items/destroy_all' => 'cart_items#destroy_all', as: "destroy_all"
     resources :cart_items, only:[:index, :update, :destroy, :create]
   end
+  
+  scope module: :public do
+    post 'orders/confirm' => 'orders#confirm', as: "orders_confirm"
+    get 'orders/thanks' => 'orders#thanks', as: "orders_thanks"
+    # get 'orders/show' => 'orders#show', as: "orders_show"
+    resources :orders, only:[:new, :create, :index, :show]
+  end
 
   # get '/public/top' => 'public/homes#top'
   root to: 'public/homes#top'

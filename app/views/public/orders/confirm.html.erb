@@ -1,0 +1,58 @@
+<!--<h1>Public::Orders#confirm</h1>-->
+<!--<p>Find me in app/views/public/orders/check.html.erb</p>-->
+<h2>注文情報確認</h2>
+<table>
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>単価(税込)</th>
+      <th>数量</th>
+      <th>小計</th>
+    </tr>
+    <tbody>
+      <% @cart_items.each do |cart_item| %>
+      <% @total_price += cart_item.get_subtotal_price %>  <!--cart_item/indexで使用した@total_price += cart_item.get_subtotal_priceを再利用。"cart_item.get~"は単一のカート商品にのみしか適用されないので、eachの中に入れて回してあげる-->
+      <tr>
+        <td><%= cart_item.item.name %></td>  <!--CartItemはItemとアソシエーションを結んでいるので、カート内商品の各情報が欲しければ.itemとする必要がある-->
+        <td><%= cart_item.item.get_tax_in_price %></td>
+        <td><%= cart_item.amount %></td>  <!--amountはCartItemで定義しているので.itemとする必要はない。-->
+        <td><%= cart_item.get_subtotal_price %></td>  <!--amountと同様-->
+      </tr>
+      <% end %>
+    </tbody>
+  </thead>
+</table>
+<table>
+  <tr>
+    <th>送料</th>
+    <td><%= @order.show_postage %></td>
+  </tr>
+  <tr>
+    <th>商品合計</th>
+    <td><%= @total_price %></td>  <!--上のeachで回した@total_priceを表示-->
+  </tr>
+  <tr>
+    <th>請求金額</th>
+    <td><%= @order.show_postage + @total_price %></td>
+  </tr>
+</table>
+
+<h3>支払方法</h3>
+<%= @order.payment_method_i18n %>  <!--enumの日本語化(_i18n)-->
+
+<h3>お届け先</h3>
+<%= @order.address %>
+
+<%= form_with model: @order, url: orders_path, method: :post do |f| %>  <!--以下order#createへ送る内容。f.submitで送れるのはf.~~と書いている箇所のみだが、入力部品がない(f.text_fieldなど)けど送りたいデータがある場合、f.hidden_fieldを使う。-->
+  <%= f.hidden_field :customer_id, :value => current_customer.id %>
+  <!--%= f.hidden_field :postal_code, :value => current_customer.postal_code %>-->
+  <%= f.hidden_field :postal_code, :value => @order.postal_code %>  <!--「自身の住所」だろうが「登録した住所」だろうが「新しい住所」だろうが、中身はaddress_flagで振り分けているだけであって、使う入れ物(中身を入れているインスタンス変数)自体はどれも変わらず@order-->
+  <!--%= f.hidden_field :address, :value => current_customer.address %>-->
+  <%= f.hidden_field :address, :value => @order.address %>
+  <%= f.hidden_field :name, :value => @order.name %>
+  <%= f.hidden_field :postage, :value => @order.show_postage %>
+  <%= f.hidden_field :total_payment, :value => @total_price %>
+  <%= f.hidden_field :payment_method, :value => @order.payment_method %>
+
+  <%= f.submit "注文を確定する" %>
+<% end %>
