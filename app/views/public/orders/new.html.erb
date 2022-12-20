@@ -1,0 +1,47 @@
+<h2>注文情報入力</h2>
+<%= form_with model: @order, url: orders_confirm_path, method: :post do |f| %>
+  <h3>支払方法</h3>
+  <!--formの中でラベルを付けてラジオボタンを表示する方法-->
+  <!--%= f.radio_button :payment_method, "credit_card" %>-->
+  <!--%= f.label :payment_method_credit_card, "クレジットカード" %></br>-->
+  <!--%= f.radio_button :payment_method, "transfer" %>-->
+  <!--%= f.label :payment_method_transfer, "銀行振込" %>-->
+
+  <!--enumを用いてラジオボタンを作成する方法-->
+  <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
+  <%= f.label :payment_method_credit_card, Order.payment_methods_i18n[:credit_card] %></br>
+  <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
+  <%= f.label :payment_method_transfer, Order.payment_methods_i18n[:transfer] %>
+
+  <h3>お届け先</h3>
+  <!--%= f.radio_button :address, current_customer.addresses %>-->
+  <%= f.radio_button :address_flag, 0 %>
+  <%= f.label :address, "ご自身の住所" %></br>
+  <!--%= f.label :address, current_customer.addresses.address_display %>-->
+  <%= f.label :address, "#{current_customer.postal_code}#{current_customer.address}" %></br>
+
+  <!--%= f.radio_button :address, %>-->
+
+  <!--%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :address_display) %>-->
+  <!--%= f.collection_select :address_id, Address.all, :id, :address_display %>-->
+  <!--上下で内容は一緒。ただ、Address.allとすると他のユーザーの配送先も取得してしまうため、現在ログインしているユーザーの住所だけを取ってくる必要がある-->
+  <!--そのため、current_customer.addresses とする必要がある(=addressesというのは、Customerがhas_many :addressesなので、アソシエーションを結んでいるからaddressesという書き方ができる。)-->
+  <%= f.radio_button :address_flag, 1 %>
+  <%= f.label :address, "登録済みの住所" %></br>
+  <%= f.collection_select :address_id, current_customer.addresses, :id, :address_display %></br>
+
+  <%= f.radio_button :address_flag, 2 %>
+  <%= f.label :address, "新しい住所" %></br>
+  <%= f.label :postal_code, "郵便番号(ハイフン無し)" %>
+  <%= f.text_field :postal_code %></br>
+  
+  <%= f.label :address, "住所" %>
+  <%= f.text_field :address %></br>
+  
+  <%= f.label :name, "宛名" %>
+  <%= f.text_field :name %></br>
+
+  <%= f.submit "確認画面へ進む" %>
+
+  <!--%= f.submit "確認画面へ進む" %>-->
+<% end %>
