@@ -1,11 +1,4 @@
 Rails.application.routes.draw do
-  # namespace :public do
-  #   get 'addresses/index'
-  #   get 'addresses/edit'
-  #   get 'addresses/create'
-  #   get 'addresses/update'
-  #   get 'addresses/destroy'
-  # end
   namespace :admin do
     resources :customers, only:[:index, :show, :edit, :update]
     resources :items, only:[:index, :new, :create, :show, :edit, :update]
@@ -30,25 +23,32 @@ Rails.application.routes.draw do
   }
 
   scope module: :public do
+    # public/customers
     get 'customers/unsubscribe' => "customers#unsubscribe", as: "unsubscribe"
     patch 'customers/withdrawal' => "customers#withdrawal", as: "withdrawal"
     get 'customers/' => 'customers#show', as: "customers_my_page"
     get 'customers/information' => 'customers#edit', as: "customer_edit"
     patch 'customers/information' => 'customers#update', as: "customers"
     delete 'cart_items/destroy_all' => 'cart_items#destroy_all', as: "destroy_all"
+
+    # public/orders
     post 'orders/confirm' => 'orders#confirm', as: "orders_confirm"
     get 'orders/thanks' => 'orders#thanks', as: "orders_thanks"
+
+    # public/addresses
     get 'addresses/information' => 'addresses#edit', as: "address_edit"
     patch 'addresses/update' => 'addresses#update', as: "address_update"
     delete 'addresses/destroy' => 'addresses#destroy', as: "address_destroy"
-    
-    
+
+
+
+    # publicの各種resources
     resources :items, only:[:index, :show]
     resources :cart_items, only:[:index, :update, :destroy, :create]
     resources :orders, only:[:new, :create, :index, :show]
     resources :addresses, only:[:index, :create]
   end
-  
+
   root to: 'public/homes#top'
   get 'about' => 'public/homes#about'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
