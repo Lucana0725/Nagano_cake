@@ -10,9 +10,9 @@
 #   password: 'hogehoge'
 # )
 
-Address.create!(
- customer_id: 1,
- postal_code: '0001111' ,
- address: '大阪府守口市佐太東町3-101-5',
- name: '山田 太郎'
-)
+# Address.create!(
+#  customer_id: 1,
+#  postal_code: '0001111' ,
+#  address: '大阪府守口市佐太東町3-101-5',
+#  name: '山田 太郎'
+# )
