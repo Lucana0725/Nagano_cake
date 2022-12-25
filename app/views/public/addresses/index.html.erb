@@ -37,7 +37,8 @@
         <%= address.name %>
       </td>
       <td>
-        <%= link_to "編集する", address_edit_path %>
+        <!--%= link_to "編集する", address_edit_path %>-->
+        <%= link_to "編集する", edit_address_path(address.id) %>
         
         <%= form_with model: @address, url: address_destroy_path, method: :delete do |f| %>
           <%= f.submit "削除する", "data-confirm" => "この配送先を削除します。よろしいですか？" %>

@@ -6,6 +6,11 @@ class Public::AddressesController < ApplicationController
   end
 
   def edit
+    # @address.customer_id = current_customer.id
+    # byebug
+    # @addresses = current_customer.addresses
+    @address = Address.find(params[:id])
+    # @address = @addresses.find(params[:id])
   end
 
   def create
