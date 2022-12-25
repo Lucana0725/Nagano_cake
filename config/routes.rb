@@ -38,7 +38,7 @@ Rails.application.routes.draw do
     # public/addresses
     # get 'addresses/information' => 'addresses#edit', as: "address_edit"    # editやupdateは、Address.findで探してくるときにparams[:id]で探してくるので、UR>にIDが含まれている必要があるのでresourcesに書いて良い …んやと思う()
     # patch 'addresses/update' => 'addresses#update', as: "address_update"
-    delete 'addresses/destroy' => 'addresses#destroy', as: "address_destroy"
+    # delete 'addresses/destroy' => 'addresses#destroy', as: "address_destroy"
 
 
 
@@ -47,7 +47,7 @@ Rails.application.routes.draw do
     resources :cart_items, only:[:index, :update, :destroy, :create]
     resources :orders, only:[:new, :create, :index, :show]
     # resources :addresses, only:[:index, :create]
-    resources :addresses, only:[:index, :create, :edit, :update]    # editやupdateは、Address.findで探してくるときにparams[:id]で探してくるので、UR>にIDが含まれている必要があるのでresourcesに書いて良い …んやと思う()
+    resources :addresses, only:[:index, :create, :edit, :update, :destroy]    # editやupdateは、Address.findで探してくるときにparams[:id]で探してくるので、UR>にIDが含まれている必要があるのでresourcesに書いて良い …んやと思う()
   end
 
   root to: 'public/homes#top'
