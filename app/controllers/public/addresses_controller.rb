@@ -24,6 +24,10 @@ class Public::AddressesController < ApplicationController
   end
 
   def update
+    # byebug
+    @address = Address.find(params[:id])
+    @address.update(address_params)
+    redirect_to addresses_path
   end
 
   def destroy
