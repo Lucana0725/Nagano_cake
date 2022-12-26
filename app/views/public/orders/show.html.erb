@@ -63,13 +63,13 @@
     <tr>
       <!--商品-->
       <td><%= order_detail.item.name %></td>
-      
+
       <!--単価（税込み）-->
       <td><%= order_detail.price_with_tax %></td>
-      
+
       <!--個数-->
       <td><%= order_detail.amount %></td>
-      
+
       <!--小計-->
       <td><%= order_detail.price_with_tax * order_detail.amount %></td>
     </tr>
