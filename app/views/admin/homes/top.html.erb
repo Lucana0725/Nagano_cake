@@ -22,7 +22,7 @@
         <% end %>
         <%= @ordered_total_amount %>  <!--each |order_detail|の中で繰り返し足し合わせた@ordered_total_amountの計算結果を表示(endの中だったら、表示が繰り返されてしまう)-->
       </td>
-      <td></td>
+      <td><%= order.order_status_i18n %></td>
     </tr>
     <% end %>
   </tbody>
