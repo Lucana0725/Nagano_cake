@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     resources :customers, only:[:index, :show, :edit, :update]
     resources :items, only:[:index, :new, :create, :show, :edit, :update]
     resources :genres, only:[:index, :create, :edit, :update]
+    resources :orders, only:[:show]
   end
 
   # デフォルトのルーティングは削除(参考：https://nllllll.com/ruby-on-rails/rails-devise/)
