@@ -7,8 +7,23 @@
       <th>注文個数</th>
       <th>注文ステータス</th>
     </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order| %>
     <tr>
+      <td><%= order.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+      <td><%= order.name %></td>
+      <td>
+        <!--% @order_details.each do |order_detail| %> -->
+        
+        <% @ordered_total_amount = 0 %>  <!--ひとつの注文ごとに注文個数をリセットするために、ゼロを用意する。-->
+        <% order.order_details.each do |order_detail| %>
+          <% @ordered_total_amount += order_detail.amount %>  <!--上で定義したものに対して、アソシエーションを用いて順番に足し合わせていく。-->
+        <% end %>
+        <%= @ordered_total_amount %>  <!--each |order_detail|の中で繰り返し足し合わせた@ordered_total_amountの計算結果を表示(endの中だったら、表示が繰り返されてしまう)-->
+      </td>
       <td></td>
     </tr>
-  </thead>
+    <% end %>
+  </tbody>
 </table>
