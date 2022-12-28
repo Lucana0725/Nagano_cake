@@ -33,3 +33,33 @@
     </td>
   </tr>
 </table>
+
+<table>
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>単価（税込）</th>
+      <th>数量</th>
+      <th>小計</th>
+      <th>製作ステータス</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order_details.each do |order_detail| %>  <!--@orderに付随する全てのOrderDetail(@order_details)に対してeach-->
+    <tr>
+      <!--商品名-->
+      <td><%= order_detail.item.name %></td>  <!--OrderDetailに紐づいているItemから名前を取り出す-->
+      <!--単価-->
+      <td><%= order_detail.price_with_tax %></td>
+      <!--数量-->
+      <td><%= order_detail.amount %></td>
+      <!--小計-->
+      <td><%= order_detail.price_with_tax * order_detail.amount %></td>
+      <!--製作ステータス-->
+      <td>
+        <!--%= form_with model: @order_detail %>-->
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
