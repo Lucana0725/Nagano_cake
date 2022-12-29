@@ -5,9 +5,13 @@ class Admin::OrdersController < ApplicationController
   end
   
   def update
-    # byebug
+    byebug
     @order = Order.find(params[:id])
+    # @order_detail = @order.order_details.find(params[:id])
     @order.update(order_status_params)
+    # if @order_detail.update
+    #   @order_detail.update(create_status_params)
+    # end
     redirect_to admin_order_path
   end
   
@@ -15,4 +19,8 @@ class Admin::OrdersController < ApplicationController
   def order_status_params
     params.require(:order).permit(:order_status)
   end
+  
+  # def create_status_params
+  #   params.require(:order_detail).permit(:create_status)
+  # end
 end
