@@ -10,7 +10,6 @@ ja:
         creating: "制作中"
         ready_to_send: "発送準備中"
         finished_send: "発送済み"
-
     order_detail:
       create_status:
         cannot_to_start: "着手不可"
