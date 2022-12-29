@@ -26,12 +26,14 @@
       <%= form_with model: @order, url: admin_order_path, method: :patch do |f| %>
         <!--%= f.collection_select :address_id, current_customer.addresses, :id, :address_display %>-->
         <%= f.select :order_status, Order.order_statuses.keys.map{|k| [I18n.t("enums.order.order_status.#{k}"), k]} %>  <!--参考：https://qiita.com/tomoharutt/items/272a10f4fefb555944f2-->
+        <!--%= f.select :order_status, Order.order_statuses_i18n.invert, prompt %>-->
         <%= f.submit "更新" %>
       <% end %>
     </td>
   </tr>
 </table>
 
+<!--提出上、実装の-->
 <table>
   <thead>
     <tr>
@@ -55,7 +57,8 @@
       <td><%= order_detail.price_with_tax * order_detail.amount %></td>
       <!--製作ステータス-->
       <td>
-        <%= form_with model: @order_detail, url: admin_order_path, method: :patch do |f| %>
+        <!--%= form_with model: order_detail, url: admin_order_detail_path(order_detail.id), method: :patch do |f| %>-->
+        <%= form_with model: order_detail, url: admin_order_detail_path, method: :patch do |f| %>
           <%= f.select :create_status, OrderDetail.create_statuses.keys.map{|k| [I18n.t("enums.order_detail.create_stauts.#{k}"), k]} %>
           <%= f.submit "更新" %>
         <% end %>

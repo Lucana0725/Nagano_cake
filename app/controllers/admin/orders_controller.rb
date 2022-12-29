@@ -5,7 +5,7 @@ class Admin::OrdersController < ApplicationController
   end
   
   def update
-    byebug
+    # byebug
     @order = Order.find(params[:id])
     # @order_detail = @order.order_details.find(params[:id])
     @order.update(order_status_params)
