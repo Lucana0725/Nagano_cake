@@ -14,9 +14,9 @@
       <% @total_price += cart_item.get_subtotal_price %>  <!--cart_item/indexで使用した@total_price += cart_item.get_subtotal_priceを再利用。"cart_item.get~"は単一のカート商品にのみしか適用されないので、eachの中に入れて回してあげる-->
       <tr>
         <td><%= cart_item.item.name %></td>  <!--CartItemはItemとアソシエーションを結んでいるので、カート内商品の各情報が欲しければ.itemとする必要がある-->
-        <td><%= cart_item.item.get_tax_in_price %></td>
+        <td><%= cart_item.item.get_tax_in_price.to_s(:delimited) %></td>
         <td><%= cart_item.amount %></td>  <!--amountはCartItemで定義しているので.itemとする必要はない。-->
-        <td><%= cart_item.get_subtotal_price %></td>  <!--amountと同様-->
+        <td><%= cart_item.get_subtotal_price.to_s(:delimited) %></td>  <!--amountと同様-->
       </tr>
       <% end %>
     </tbody>
@@ -29,11 +29,11 @@
   </tr>
   <tr>
     <th>商品合計</th>
-    <td><%= @total_price %></td>  <!--上のeachで回した@total_priceを表示-->
+    <td><%= @total_price.to_s(:delimited) %></td>  <!--上のeachで回した@total_priceを表示-->
   </tr>
   <tr>
     <th>請求金額</th>
-    <td><%= @order.show_postage + @total_price %></td>
+    <td><%= (@order.show_postage + @total_price).to_s(:delimited) %></td>
   </tr>
 </table>
 

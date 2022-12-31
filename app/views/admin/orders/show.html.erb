@@ -50,11 +50,11 @@
       <!--商品名-->
       <td><%= order_detail.item.name %></td>  <!--OrderDetailに紐づいているItemから名前を取り出す-->
       <!--単価-->
-      <td><%= order_detail.price_with_tax %></td>
+      <td><%= order_detail.price_with_tax.to_s(:delimited) %></td>
       <!--数量-->
       <td><%= order_detail.amount %></td>
       <!--小計-->
-      <td><%= order_detail.price_with_tax * order_detail.amount %></td>
+      <td><%= (order_detail.price_with_tax * order_detail.amount).to_s(:delimited) %></td>
       <!--製作ステータス-->
       <td>
         <!--%= form_with model: order_detail, url: admin_order_detail_path(order_detail.id), method: :patch do |f| %>-->

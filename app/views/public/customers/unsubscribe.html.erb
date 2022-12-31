@@ -4,7 +4,7 @@
 <p>退会する場合は、「退会する」をクリックしてください。</p>
 
 <%= link_to "退会しない", customer_edit_path %>
-<%= link_to "退会する", withdrawal_path, method: :patch %>
+<%= link_to "退会する", withdrawal_path, method: :patch, "data-confirm" => "本当に退会しますか？" %>
 <!--%= form_with model: @customer, url: withdrawal_path, method: :patch do |f| %>-->
 <!--  %= f.submit "退会する" %>-->
 <!--% end %>-->

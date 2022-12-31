@@ -4,7 +4,7 @@
 <table>
   <tr>
     <th>注文日</th>
-    <td><%= @order.created_at.strftime('%Y/%d/%d') %></td>
+    <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
   </tr>
   <tr>
     <th>配送先</th>
@@ -33,7 +33,7 @@
       <% @order.order_details.each do |order_detail| %>  <!--OrderとOrderDetailは1対Nの関係なので、Orderに入っている全てのOrderDetailに対して(each)-->
         <% @ordered_total_price += (order_detail.price_with_tax * order_detail.amount) %>  <!--コントローラーで定義した@ordered_total_priceという変数に、OrderDetailが持つ"price_with_tax(単価)"に"amount"を掛け、足し合わせてあげる-->
       <% end %>
-      <%= @ordered_total_price %>  <!--上で足し合わせた@ordered_total_priceをここで表示させる。上(each内)で表示させてしまうと、各商品毎のトータル(A:2個、B:3個だとすると今回ほしいのは(A*2)+(B*3)なのに、(A*2),(B*3)という独立した金額が出てしまうため。)-->
+      <%= @ordered_total_price.to_s(:delimited) %>  <!--上で足し合わせた@ordered_total_priceをここで表示させる。上(each内)で表示させてしまうと、各商品毎のトータル(A:2個、B:3個だとすると今回ほしいのは(A*2)+(B*3)なのに、(A*2),(B*3)という独立した金額が出てしまうため。)-->
     </td>
   </tr>
   <tr>
@@ -42,7 +42,7 @@
   </tr>
   <tr>
     <th>ご請求金額</th>
-    <td><%= @ordered_total_price + @order.postage %></td>
+    <td><%= (@ordered_total_price + @order.postage).to_s(:delimited) %></td>
   </tr>
 </table>
 
@@ -65,13 +65,13 @@
       <td><%= order_detail.item.name %></td>
 
       <!--単価（税込み）-->
-      <td><%= order_detail.price_with_tax %></td>
+      <td><%= order_detail.price_with_tax.to_s(:delimited) %></td>
 
       <!--個数-->
       <td><%= order_detail.amount %></td>
 
       <!--小計-->
-      <td><%= order_detail.price_with_tax * order_detail.amount %></td>
+      <td><%= (order_detail.price_with_tax * order_detail.amount).to_s(:delimited) %></td>
     </tr>
     <% end %>
   </tbody>
