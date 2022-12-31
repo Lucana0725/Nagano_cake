@@ -24,7 +24,7 @@
       <td><%= cart_item.item.name %></td>
 
       <!--税込み価格-->
-      <td><%= cart_item.item.get_tax_in_price %></td>
+      <td><%= cart_item.item.get_tax_in_price.to_s(:delimited) %></td>
       <!--<td>%= (cart_item.item.price * 1.1).to_i %></td>  上の行と効果は同じ。こちらはモデルで計算用のメソッドを持たせなくて良い記述-->
 
       <!--数量-->
@@ -40,7 +40,7 @@
 
       <!--小計-->
       <!--<td>%= (cart_item.item.get_tax_in_price) * (cart_item.amount) %></td>-->
-      <td><%= cart_item.get_subtotal_price %></td>
+      <td><%= cart_item.get_subtotal_price.to_s(:delimited) %></td>
 
       <!--削除-->
       <td>
@@ -59,10 +59,11 @@
   </tbody>
 </table>
 
-<!--each文の外に書くことで上で計算した内容を表示できる-->
 
 <%= link_to "買い物を続ける", items_path %>
-<p>合計金額：<%= @total_price %></p>
+
+<!--each文の外に書くことで上で計算した内容を表示できる-->
+<p>合計金額：<%= @total_price.to_s(:delimited) %></p>
 
 <!--<p>情報入力に進む</p>-->
 <% if @cart_items.present? %>  <!--カート内商品があるときのみリンクを表示。 参考：https://qiita.com/jackie0922youhei/items/d9319ed3edfa01c38856-->

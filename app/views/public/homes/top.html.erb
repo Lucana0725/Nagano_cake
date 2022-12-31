@@ -9,7 +9,7 @@
     <%= image_tag item.get_item_image(100, 100) %></br>
     <%= item.name %></br>
   <% end %>
-  ￥<%= item.price %></br>
+  ￥<%= item.get_tax_in_price.to_s(:delimited) %>（税込）</br>
 <% end %>
 
 <%= link_to "全ての商品を見る>", items_path %>
