@@ -30,6 +30,13 @@
     <%= f.label :email, "メールアドレス" %>
     <%= f.text_field :email, :placeholder => "hoge@example.com" %>
   </div>
+  <div>
+    <%= f.label :is_deleted, "会員ステータス" %>
+      <%= f.radio_button :is_deleted, false %>
+      <%= f.label :is_deleted_false, "有効" %>
+      <%= f.radio_button :is_deleted, true %>
+      <%= f.label :is_deleted_true, "退会" %>
+  </div>
 
   <%= f.submit "変更を保存" %>
 <% end %>
