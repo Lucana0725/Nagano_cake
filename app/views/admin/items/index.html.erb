@@ -25,7 +25,7 @@
       </td>
       <!--税抜き価格-->
       <td>
-        <%= item.price %>
+        <%= item.price.to_s(:delimited) %>
       </td>
     </tr>
     <% end %>
