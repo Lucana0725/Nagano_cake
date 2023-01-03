@@ -1,36 +1,47 @@
-<h2>商品新規登録</h2>
-
-<%= form_with model: @item, url: admin_items_path, method: :post do |f| %>
-  <div>
-    <%= f.label :image, "商品画像" %>
-    <%= f.file_field :image, accept: "image/*" %>
+<div class="container pt-3">
+  <div class="row">
+    <div class="bg-light">
+      <h3>商品新規登録</h3>
+    </div>
   </div>
-  <div>
-    <%= f.label :name , "商品名"%>
-    <%= f.text_field :name, :placeholder => "商品名" %>
+    
+  <div class="row">
+    <div>
+      <%= form_with model: @item, url: admin_items_path, method: :post do |f| %>
+        <div>
+          <%= f.label :image, "商品画像" %>
+          <%= f.file_field :image, accept: "image/*" %>
+        </div>
+        <div>
+          <%= f.label :name , "商品名"%>
+          <%= f.text_field :name, :placeholder => "商品名" %>
+        </div>
+        <div>
+          <%= f.label :introduction, "商品説明" %>
+          <%= f.text_area :introduction, :placeholder => "ここに説明文を記述します" %>
+        </div>
+      
+        <!--<div>-->
+        <!--  %= f.label :genre_id, "ジャンル" %>-->
+        <!--  %= f.select :genre_id, {@item.genre_id => @item.genre_id.name} %>-->
+        <!--</div>-->
+        <!--ジャンルを追加できるよう改良-->
+        <!--参考：https://qiita.com/colorrabbit/items/b58888506e41d1370fd1-->
+        <div>
+          <%= f.label :genre_id, "ジャンル" %>
+          <%= f.collection_select :genre_id, Genre.all, :id, :name, :include_blank => "選択してください" %>
+        </div>
+      
+        <div>
+          <%= f.label :price, "税抜価格" %>
+          <%= f.text_field :price, :placeholder => "1000" %>円
+        </div>
+      
+        <div>
+          <%= f.submit "新規登録" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-  <div>
-    <%= f.label :introduction, "商品説明" %>
-    <%= f.text_area :introduction, :placeholder => "ここに説明文を記述します" %>
-  </div>
-
-  <!--<div>-->
-  <!--  %= f.label :genre_id, "ジャンル" %>-->
-  <!--  %= f.select :genre_id, {@item.genre_id => @item.genre_id.name} %>-->
-  <!--</div>-->
-  <!--ジャンルを追加できるよう改良-->
-  <!--参考：https://qiita.com/colorrabbit/items/b58888506e41d1370fd1-->
-  <div>
-    <%= f.label :genre_id, "ジャンル" %>
-    <%= f.collection_select :genre_id, Genre.all, :id, :name, :include_blank => "選択してください" %>
-  </div>
-
-  <div>
-    <%= f.label :price, "税抜価格" %>
-    <%= f.text_field :price, :placeholder => "1000" %>円
-  </div>
-
-  <div>
-    <%= f.submit "新規登録" %>
-  </div>
-<% end %>
+  
+</div>
