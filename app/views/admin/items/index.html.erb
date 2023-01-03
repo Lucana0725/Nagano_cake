@@ -1,33 +1,44 @@
-<h2>商品一覧</h2>
-<%= link_to "+", new_admin_item_path %>
-
-<table>
-  <thead>
-    <tr>
-      <th>商品ID</th>
-      <th>商品名</th>
-      <th>税抜価格</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!--商品の一覧を表示するので@items = Item.allを使ってeachで一つずつ取り出す-->
-    <% @items.each do |item| %>
-    <tr>
-      <!--商品id-->
-      <td>
-        <%= item.id %>
-      </td>
-      <!--商品名(showへのリンク付き)-->
-      <td>
-        <%= link_to admin_item_path(item.id) do %>
-          <%= item.name %>
+<div class="container">
+  <div class="row">
+    <div class="bg-light">
+      <h2>商品一覧</h2>
+    </div>
+  
+    <div class="text-right">
+      <%= link_to "+", new_admin_item_path %>
+    </div>
+  </div>
+    
+  <div class="row">
+    <table class="table mt-3">
+      <thead class="bg-light">
+        <tr>
+          <th>商品ID</th>
+          <th>商品名</th>
+          <th>税抜価格</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!--商品の一覧を表示するので@items = Item.allを使ってeachで一つずつ取り出す-->
+        <% @items.each do |item| %>
+        <tr>
+          <!--商品id-->
+          <td>
+            <%= item.id %>
+          </td>
+          <!--商品名(showへのリンク付き)-->
+          <td>
+            <%= link_to admin_item_path(item.id) do %>
+              <%= item.name %>
+            <% end %>
+          </td>
+          <!--税抜き価格-->
+          <td>
+            <%= item.price.to_s(:delimited) %>
+          </td>
+        </tr>
         <% end %>
-      </td>
-      <!--税抜き価格-->
-      <td>
-        <%= item.price.to_s(:delimited) %>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+      </tbody>
+    </table>
+  </div>
+</div>
