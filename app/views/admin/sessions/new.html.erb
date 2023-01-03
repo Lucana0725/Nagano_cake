@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="mt-5 bg-light">
-      <h2>管理者ログイン</h2>
+      <h3>管理者ログイン</h3>
     </div>
   </div>
     
@@ -14,8 +14,8 @@
         </div>
       
         <div class="field">
-          <%= f.label :password, "パスワード", class: "mr-5" %>
-          <%= f.password_field :password, autocomplete: "current-password" %>
+          <%= f.label :password, "パスワード", class: "mt-3 ml-auto" %>
+          <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
         </div>
       
         <!--% if devise_mapping.rememberable? %>-->
@@ -25,8 +25,8 @@
         <!--  </div>-->
         <!--% end %>-->
       
-        <div class="actions">
-          <%= f.submit "ログイン" %>
+        <div class="actions text-center">
+          <%= f.submit "ログイン", class: "mt-3 btn btn-primary" %>
         </div>
       <% end %>
       
