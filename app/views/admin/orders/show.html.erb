@@ -1,69 +1,83 @@
-<h2>注文履歴詳細</h2>
-
-<table>
-  <tr>
-    <th>購入者</th>
-    <td><%= @order.name %></td>
-  </tr>
-  <tr>
-    <th>注文日</th>
-    <td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
-  </tr>
-  <tr>
-    <th>配送先</th>
-    <td>
-      〒<%= @order.postal_code + @order.address %></br>
-      <%= @order.name %>
-    </td>
-  </tr>
-  <tr>
-    <th>支払方法</th>
-    <td><%= @order.payment_method_i18n %></td>
-  </tr>
-  <tr>
-    <th>注文ステータス</th>
-    <td>
-      <%= form_with model: @order, url: admin_order_path, method: :patch do |f| %>
-        <!--%= f.collection_select :address_id, current_customer.addresses, :id, :address_display %>-->
-        <%= f.select :order_status, Order.order_statuses.keys.map{|k| [I18n.t("enums.order.order_status.#{k}"), k]} %>  <!--参考：https://qiita.com/tomoharutt/items/272a10f4fefb555944f2-->
-        <!--%= f.select :order_status, Order.order_statuses_i18n.invert, prompt %>-->
-        <%= f.submit "更新" %>
-      <% end %>
-    </td>
-  </tr>
-</table>
-
-<!--提出上、実装の必要はない-->
-<table>
-  <thead>
-    <tr>
-      <th>商品名</th>
-      <th>単価（税込）</th>
-      <th>数量</th>
-      <th>小計</th>
-      <th>製作ステータス</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @order_details.each do |order_detail| %>  <!--@orderに付随する全てのOrderDetail(@order_details)に対してeach-->
-    <tr>
-      <!--商品名-->
-      <td><%= order_detail.item.name %></td>  <!--OrderDetailに紐づいているItemから名前を取り出す-->
-      <!--単価-->
-      <td><%= order_detail.price_with_tax.to_s(:delimited) %></td>
-      <!--数量-->
-      <td><%= order_detail.amount %></td>
-      <!--小計-->
-      <td><%= (order_detail.price_with_tax * order_detail.amount).to_s(:delimited) %></td>
-      <!--製作ステータス-->
-      <td>
-        <!--%= form_with model: order_detail, url: admin_order_detail_path(order_detail.id), method: :patch do |f| %>-->
-        <%= form_with model: order_detail, url: admin_order_detail_path, method: :patch do |f| %>
-          <%= f.select :create_status, OrderDetail.create_statuses.keys.map{|k| [I18n.t("enums.order_detail.create_stauts.#{k}"), k]} %>
-          <%= f.submit "更新" %>
-        <% end %>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="container pt-3">
+  <div class="row">
+    <div class="bg-light">
+      <h2>注文履歴詳細</h2>
+    </div>
+  </div>
+  
+  <div class="row mt-3">
+    <div class="col-6">
+      <table class="table table-borderless">
+        <tr>
+          <th>購入者</th>
+          <td><%= @order.name %></td>
+        </tr>
+        <tr>
+          <th>注文日</th>
+          <td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
+        </tr>
+        <tr>
+          <th>配送先</th>
+          <td>
+            〒<%= @order.postal_code + " " +  @order.address %> </br>
+            <%= @order.name %>
+          </td>
+        </tr>
+        <tr>
+          <th>支払方法</th>
+          <td><%= @order.payment_method_i18n %></td>
+        </tr>
+        <tr>
+          <th>注文ステータス</th>
+          <td>
+            <%= form_with model: @order, url: admin_order_path, method: :patch do |f| %>
+              <!--%= f.collection_select :address_id, current_customer.addresses, :id, :address_display %>-->
+              <%= f.select :order_status, Order.order_statuses.keys.map{|k| [I18n.t("enums.order.order_status.#{k}"), k]} %>  <!--参考：https://qiita.com/tomoharutt/items/272a10f4fefb555944f2-->
+              <!--%= f.select :order_status, Order.order_statuses_i18n.invert, prompt %>-->
+              <%= f.submit "更新", class: "ml-3 btn btn-success" %>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  
+  <!--提出上、実装の必要はない-->
+  <div class="row">
+    <div>
+      <table class="table">
+        <thead class="bg-light">
+          <tr>
+            <th class="col-3">商品名</th>
+            <th class="col-2">単価（税込）</th>
+            <th class="col-1">数量</th>
+            <th>小計</th>
+            <th>製作ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order_details.each do |order_detail| %>  <!--@orderに付随する全てのOrderDetail(@order_details)に対してeach-->
+          <tr>
+            <!--商品名-->
+            <td><%= order_detail.item.name %></td>  <!--OrderDetailに紐づいているItemから名前を取り出す-->
+            <!--単価-->
+            <td><%= order_detail.price_with_tax.to_s(:delimited) %></td>
+            <!--数量-->
+            <td><%= order_detail.amount %></td>
+            <!--小計-->
+            <td><%= (order_detail.price_with_tax * order_detail.amount).to_s(:delimited) %></td>
+            <!--製作ステータス-->
+            <td>
+              <!--%= form_with model: order_detail, url: admin_order_detail_path(order_detail.id), method: :patch do |f| %>-->
+              <%= form_with model: order_detail, url: admin_order_detail_path, method: :patch do |f| %>
+                <%= f.select :create_status, OrderDetail.create_statuses.keys.map{|k| [I18n.t("enums.order_detail.create_stauts.#{k}"), k]} %>
+                <%= f.submit "更新" %>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

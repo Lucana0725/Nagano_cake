@@ -1,33 +1,80 @@
-<h2>商品一覧</h2>
-<%= link_to "+", new_admin_item_path %>
-
-<table>
-  <thead>
-    <tr>
-      <th>商品ID</th>
-      <th>商品名</th>
-      <th>税抜価格</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!--商品の一覧を表示するので@items = Item.allを使ってeachで一つずつ取り出す-->
-    <% @items.each do |item| %>
-    <tr>
-      <!--商品id-->
-      <td>
-        <%= item.id %>
-      </td>
-      <!--商品名(showへのリンク付き)-->
-      <td>
-        <%= link_to admin_item_path(item.id) do %>
-          <%= item.name %>
+<div class="container pt-3">
+  <!--<div class="row">-->
+  <!--  <div class="bg-light">-->
+  <!--    <h2>商品一覧</h2>-->
+  <!--  </div>-->
+  <!--</div>-->
+  
+  <!--<div class="row">-->
+  <!--  <div class="text-right">-->
+      <!--%= link_to "+", new_admin_item_path %>-->
+  <!--    %= link_to new_admin_item_path do %>-->
+  <!--      <span><i class="fas fa-plus-circle"></i></span>-->
+  <!--    % end %>-->
+  <!--  </div>-->
+  <!--</div>-->
+  
+  <div class="row">
+    <div class="col">
+      <div class="bg-light">
+        <h2>商品一覧</h2>
+      </div>
+    </div>
+    
+    <div class="col text-right">
+      <div>
+        <%= link_to new_admin_item_path do %>
+          <span><i class="fas fa-plus-circle"></i></span>
         <% end %>
-      </td>
-      <!--税抜き価格-->
-      <td>
-        <%= item.price.to_s(:delimited) %>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+      </div>
+    </div>
+  </div>
+    
+  <div class="row">
+    <table class="table mt-3">
+      <thead class="bg-light">
+        <tr>
+          <th>商品ID</th>
+          <th>商品名</th>
+          <th>税抜価格</th>
+          <th>ジャンル</th>
+          <th>ステータス</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!--商品の一覧を表示するので@items = Item.allを使ってeachで一つずつ取り出す-->
+        <% @items.each do |item| %>
+        <tr>
+          <!--商品id-->
+          <td>
+            <%= item.id %>
+          </td>
+          <!--商品名(showへのリンク付き)-->
+          <td>
+            <%= link_to admin_item_path(item.id) do %>
+              <%= item.name %>
+            <% end %>
+          </td>
+          <!--税抜き価格-->
+          <td>
+            <%= item.price.to_s(:delimited) %>
+          </td>
+          <td>
+            <%= item.genre.name %>
+          </td>
+          <% if item.is_active %>
+            <td class="text-success">
+              <!--%= item.is_active ? "販売中" : "販売停止中" %>-->
+              販売中
+            </td>
+          <% else %>
+            <td class="text-secondary">
+              販売停止中
+            </td>
+          <% end %>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -266,7 +266,7 @@ Devise.setup do |config|
   # config.navigational_formats = ['*/*', :html]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
-  config.sign_out_via = :delete
+  config.sign_out_via = :delete  # なぜかログアウト時にルーティングエラーでGetエラーが出るのでココをdeleteからgetに変更、何故か治った 参考：https://qiita.com/ken_sasaki2/items/ef0802ed0d8257753a6d
 
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting

@@ -1,42 +1,113 @@
-<h2>
-  <%= @customer.last_name + @customer.first_name %>さんの会員情報編集
-</h2>
-<p>会員ID<%= @customer.id %></p>
-
-<%= form_with model: @customer, url: admin_customer_path, method: :patch do |f| %>
-  <div>
-    <%= f.label :name, "氏名" %>
-    <%= f.text_field :last_name, :placeholder => "姓" %>
-    <%= f.text_field :first_name, :placeholder => "名" %>
-  </div>
-  <div>
-    <%= f.label :name, "フリガナ" %>
-    <%= f.text_field :last_name_kana, :placeholder => "セイ" %>
-    <%= f.text_field :first_name_kana, :placeholder => "メイ" %>
-  </div>
-  <div>
-    <%= f.label :postal_code, "郵便番号" %>
-    <%= f.text_field :postal_code, :placeholder => "1500041" %>
-  </div>
-  <div>
-    <%= f.label :address, "住所" %>
-    <%= f.text_field :address, :placeholder => "東京都渋谷区神南１丁目１９−１１ パークウェースクエア2 4階" %>
-  </div>
-  <div>
-    <%= f.label :telephone_number, "電話番号" %>
-    <%= f.text_field :telephone_number, :placeholder => "0368694700" %>
-  </div>
-  <div>
-    <%= f.label :email, "メールアドレス" %>
-    <%= f.text_field :email, :placeholder => "hoge@example.com" %>
-  </div>
-  <div>
-    <%= f.label :is_deleted, "会員ステータス" %>
-      <%= f.radio_button :is_deleted, false %>
-      <%= f.label :is_deleted_false, "有効" %>
-      <%= f.radio_button :is_deleted, true %>
-      <%= f.label :is_deleted_true, "退会" %>
+<div class="container pt-3">
+  <div class="row">
+    <div class="bg-light">
+      <h2>
+        <%= @customer.last_name + @customer.first_name %>さんの会員情報編集
+      </h2>
+    </div>
   </div>
 
-  <%= f.submit "変更を保存" %>
-<% end %>
+  <!--<p>会員ID%= @customer.id %></p>-->
+
+  <!--%= form_with model: @customer, url: admin_customer_path, method: :patch do |f| %>-->
+  <!--  <div>-->
+  <!--    %= f.label :name, "氏名" %>-->
+  <!--    %= f.text_field :last_name, :placeholder => "姓" %>-->
+  <!--    %= f.text_field :first_name, :placeholder => "名" %>-->
+  <!--  </div>-->
+  <!--  <div>-->
+  <!--    %= f.label :name, "フリガナ" %>-->
+  <!--    %= f.text_field :last_name_kana, :placeholder => "セイ" %>-->
+  <!--    %= f.text_field :first_name_kana, :placeholder => "メイ" %>-->
+  <!--  </div>-->
+  <!--  <div>-->
+  <!--    %= f.label :postal_code, "郵便番号" %>-->
+  <!--    %= f.text_field :postal_code, :placeholder => "1500041" %>-->
+  <!--  </div>-->
+  <!--  <div>-->
+  <!--    %= f.label :address, "住所" %>-->
+  <!--    %= f.text_field :address, :placeholder => "東京都渋谷区神南１丁目１９−１１ パークウェースクエア2 4階" %>-->
+  <!--  </div>-->
+  <!--  <div>-->
+  <!--    %= f.label :telephone_number, "電話番号" %>-->
+  <!--    %= f.text_field :telephone_number, :placeholder => "0368694700" %>-->
+  <!--  </div>-->
+  <!--  <div>-->
+  <!--    %= f.label :email, "メールアドレス" %>-->
+  <!--    %= f.text_field :email, :placeholder => "hoge@example.com" %>-->
+  <!--  </div>-->
+  <!--  <div>-->
+  <!--    %= f.label :is_deleted, "会員ステータス" %>-->
+  <!--      %= f.radio_button :is_deleted, false %>-->
+  <!--      %= f.label :is_deleted_false, "有効" %>-->
+  <!--      %= f.radio_button :is_deleted, true %>-->
+  <!--      %= f.label :is_deleted_true, "退会" %>-->
+  <!--  </div>-->
+
+
+
+  <div class="row mt-3">
+    <div class="col-10 mx-auto">
+      <table class="table table-borderless">
+        <tr>
+          <th>会員ID</th>
+          <td><%= @customer.id %></td>
+        </tr>
+        <%= form_with model: @customer, url: admin_customer_path, method: :patch do |f| %>
+        <tr>
+          <th><%= f.label :name, "氏名" %></th>
+          <td>
+            <%= f.text_field :last_name, :placeholder => "姓" %>
+            <%= f.text_field :first_name, :placeholder => "名" %>
+          </td>
+        </tr>
+        <tr>
+          <th><%= f.label :name, "フリガナ" %></th>
+          <td>
+            <%= f.text_field :last_name_kana, :placeholder => "セイ" %>
+            <%= f.text_field :first_name_kana, :placeholder => "メイ" %>
+          </td>
+        </tr>
+        <tr>
+          <th><%= f.label :postal_code, "郵便番号" %></th>
+          <td>
+            <%= f.text_field :postal_code, :placeholder => "1500041" %>
+          </td>
+        </tr>
+        <tr>
+          <th><%= f.label :address, "住所" %></th>
+          <td>
+            <%= f.text_field :address, :placeholder => "東京都渋谷区神南１丁目１９−１１ パークウェースクエア2 4階", class: "col-10 text-left" %>
+          </td>
+        </tr>
+        <tr>
+          <th><%= f.label :telephone_number, "電話番号" %></th>
+          <td>
+            <%= f.text_field :telephone_number, :placeholder => "0368694700" %>
+          </td>
+        </tr>
+        <tr>
+          <th><%= f.label :email, "メールアドレス" %></th>
+          <td>
+            <%= f.text_field :email, :placeholder => "hoge@example.com" %>
+          </td>
+        </tr>
+        <tr>
+          <th><%= f.label :is_deleted, "会員ステータス" %></th>
+          <td>
+            <%= f.radio_button :is_deleted, false %>
+              <%= f.label :is_deleted_false, "有効" %>
+              <%= f.radio_button :is_deleted, true %>
+              <%= f.label :is_deleted_true, "退会" %>
+          </td>
+        </tr>
+      </table>
+  
+      <div class="text-center">
+        <%= f.submit "変更を保存", class: "btn btn-success" %>
+      </div>
+      <% end %>
+      
+    </div>
+  </div>
+</div>

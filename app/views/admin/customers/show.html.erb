@@ -1,16 +1,71 @@
-<h2>
-  <%= @customer.last_name + @customer.first_name %>さんの会員詳細
-</h2>
+<div class="container pt-3">
+  <div class="row">
+    <div class="bg-light">
+      <h2>
+        <%= @customer.last_name + @customer.first_name %>さんの会員詳細
+      </h2>
+    </div>
+  </div>
 
-<p>会員ID <%= @customer.id %></p>
-<p>氏名 <%= @customer.last_name + " " + @customer.first_name %></p>
-<p>フリガナ <%= @customer.last_name_kana + " " + @customer.first_name_kana %></p>
-<p>郵便番号 <%= @customer.postal_code %></p>
-<p>住所 <%= @customer.address %></p>
-<p>電話番号 <%= @customer.telephone_number %></p>
-<p>メールアドレス <%= @customer.email %></p>
-<p>会員ステータス <%= @customer.is_deleted ? "退会" : "有効" %></p>  <!--退会ステータスはBoolean値なのでそのままだと"true", "false"で表示されてしまうので任意の言葉に変換させる-->
+  <div class="row">
+    <!--<p>会員ID %= @customer.id %></p>-->
+    <!--<p>氏名 %= @customer.last_name + " " + @customer.first_name %></p>-->
+    <!--<p>フリガナ %= @customer.last_name_kana + " " + @customer.first_name_kana %></p>-->
+    <!--<p>郵便番号 %= @customer.postal_code %></p>-->
+    <!--<p>住所 %= @customer.address %></p>-->
+    <!--<p>電話番号 %= @customer.telephone_number %></p>-->
+    <!--<p>メールアドレス %= @customer.email %></p>-->
+    <!--<p>会員ステータス %= @customer.is_deleted ? "退会" : "有効" %></p>  <!--退会ステータスはBoolean値なのでそのままだと"true", "false"で表示されてしまうので任意の言葉に変換させる-->
 
-<!--引数に(@customer.id)を入れても良いが、冗長なので省略-->
-<%= link_to "編集する", edit_admin_customer_path %>
-<!--%= link_to "注文履歴一覧を見る",  %>-->
+    <!--引数に(@customer.id)を入れても良いが、冗長なので省略-->
+    <!--%= link_to "編集する", edit_admin_customer_path %>-->
+    <!--%= link_to "注文履歴一覧を見る",  %>-->
+    <div class="col-7 mt-3">
+      <table class="table table-borderless">
+        <tr>
+          <th>会員ID</th>
+          <td><%= @customer.id %></td>
+        </tr>
+        <tr>
+          <th>氏名</th>
+          <td><%= @customer.last_name + " " + @customer.first_name %></td>
+        </tr>
+        <tr>
+          <th>フリガナ</th>
+          <td><%= @customer.last_name_kana + " " + @customer.first_name_kana %></td>
+        </tr>
+        <tr>
+          <th>郵便番号</th>
+          <td><%= @customer.postal_code %></td>
+        </tr>
+        <tr>
+          <th>住所</th>
+          <td><%= @customer.address %></td>
+        </tr>
+        <tr>
+          <th>電話番号</th>
+          <td><%= @customer.telephone_number %></td>
+        </tr>
+        <tr>
+          <th>メールアドレス</th>
+          <td><%= @customer.email %></td>
+        </tr>
+        <tr>
+          <th>会員ステータス</th>
+          <!--<td>%= @customer.is_deleted ? "退会" : "有効" %></td>  <!--退会ステータスはBoolean値なのでそのままだと"true", "false"で表示されてしまうので任意の言葉に変換させる-->
+          <% if @customer.is_deleted %>
+            <td class="text-secondary">退会</td>
+          <% else %>
+            <td class="text-success">有効</td>
+          <% end %>
+        </tr>
+      </table>
+
+      <!--引数に(@customer.id)を入れても良いが、冗長なので省略-->
+      <%= link_to "編集する", edit_admin_customer_path, class: "btn btn-success mr-5" %>
+      <%= link_to "注文履歴一覧を見る", "#", class: "btn btn-primary" %>
+
+    </div>
+
+  </div>
+</div>
