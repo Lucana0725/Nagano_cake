@@ -6,7 +6,7 @@
       </h2>
     </div>
   </div>
-  
+
   <div class="row">
     <!--<p>会員ID %= @customer.id %></p>-->
     <!--<p>氏名 %= @customer.last_name + " " + @customer.first_name %></p>-->
@@ -16,7 +16,7 @@
     <!--<p>電話番号 %= @customer.telephone_number %></p>-->
     <!--<p>メールアドレス %= @customer.email %></p>-->
     <!--<p>会員ステータス %= @customer.is_deleted ? "退会" : "有効" %></p>  <!--退会ステータスはBoolean値なのでそのままだと"true", "false"で表示されてしまうので任意の言葉に変換させる-->
-    
+
     <!--引数に(@customer.id)を入れても良いが、冗長なので省略-->
     <!--%= link_to "編集する", edit_admin_customer_path %>-->
     <!--%= link_to "注文履歴一覧を見る",  %>-->
@@ -60,12 +60,12 @@
           <% end %>
         </tr>
       </table>
-      
+
       <!--引数に(@customer.id)を入れても良いが、冗長なので省略-->
       <%= link_to "編集する", edit_admin_customer_path, class: "btn btn-success mr-5" %>
       <%= link_to "注文履歴一覧を見る", "#", class: "btn btn-primary" %>
-      
+
     </div>
-    
+
   </div>
 </div>
