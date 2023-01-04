@@ -1,10 +1,20 @@
 <div class="container">
   <div class="row">
     <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
-      <h3>ようこそ、ながのCAKEへ！</h3>
-      <h3>このサイトは、ケーキ販売のECサイトです。</h3>
-      <h3>会員でない方も商品の閲覧はできますが、</h3>
-      <h3>購入には会員登録が必要になります。</h3>
+      <!--<p>ようこそ、ながのCAKEへ！</p>-->
+      <!--<p>このサイトは、ケーキ販売のECサイトです。</p>-->
+      <!--<p>会員でない方も商品の閲覧はできますが、</p>-->
+      <!--<p>購入には会員登録が必要になります。</p>-->
+      
+      <div class="card">
+        <%= image_tag "cake-wallpaper", style="" %>
+        <div>
+          ようこそ、ながのCAKEへ！</br>
+          このサイトは、ケーキ販売のECサイトです。</br>
+          会員でない方も商品の閲覧はできますが、</br>
+          購入には会員登録が必要になります。
+        </div>
+      </div>
 
       <h2>新着商品</h2>
       <% @items.each do |item| %>  <!--homes#topで取ってきた@itemsに対してeach-->
