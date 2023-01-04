@@ -4,8 +4,9 @@
       <h3>商品新規登録</h3>
     </div>
   </div>
-    
-  <div class="row">
+
+
+  <div class="row justify-content-center">
     <!--<div>-->
     <!--  %= form_with model: @item, url: admin_items_path, method: :post do |f| %>-->
     <!--    <div>-->
@@ -20,7 +21,7 @@
     <!--      %= f.label :introduction, "商品説明" %>-->
     <!--      %= f.text_area :introduction, :placeholder => "ここに説明文を記述します" %>-->
     <!--    </div>-->
-      
+
         <!--<div>-->
         <!--  %= f.label :genre_id, "ジャンル" %>-->
         <!--  %= f.select :genre_id, {@item.genre_id => @item.genre_id.name} %>-->
@@ -31,12 +32,12 @@
     <!--      %= f.label :genre_id, "ジャンル" %>-->
     <!--      %= f.collection_select :genre_id, Genre.all, :id, :name, :include_blank => "選択してください" %>-->
     <!--    </div>-->
-      
+
     <!--    <div>-->
     <!--      %= f.label :price, "税抜価格" %>-->
     <!--      %= f.text_field :price, :placeholder => "1000" %>円-->
     <!--    </div>-->
-      
+
     <!--    <div>-->
     <!--      %= f.submit "新規登録" %>-->
     <!--    </div>-->
@@ -47,27 +48,27 @@
         <table class="table table-borderless">
           <tr>
             <th><%= f.label :image, "商品画像" %></th>
-            <td><%= f.file_field :image, accept: "image/*" %></td>
+            <td><%= f.file_field :image, accept: "image/*", class: "ml-5" %></td>
           </tr>
           <tr>
             <th><%= f.label :name , "商品名"%></th>
-            <td><%= f.text_field :name, :placeholder => "商品名" %></td>
+            <td><%= f.text_field :name, :placeholder => "商品名", class: "ml-5" %></td>
           </tr>
           <tr>
             <th><%= f.label :introduction, "商品説明" %></th>
-            <td><%= f.text_area :introduction, :placeholder => "ここに説明文を記述します" %></td>
+            <td><%= f.text_area :introduction, :placeholder => "ここに説明文を記述します", class: "ml-5" %></td>
           </tr>
           <tr>
             <th><%= f.label :genre_id, "ジャンル" %></th>
-            <td><%= f.collection_select :genre_id, Genre.all, :id, :name, :include_blank => "選択してください" %></td>
+            <td><%= f.collection_select :genre_id, Genre.all, :id, :name, :include_blank => "選択してください", class: "ml-5" %></td>
           </tr>
           <tr>
             <th><%= f.label :price, "税抜価格" %></th>
-            <td><%= f.text_field :price, :placeholder => "1000" %>円</td>
+            <td><%= f.text_field :price, :placeholder => "1000", class: "ml-5" %>円</td>
           </tr>
         </table>
-        <div>
-          <%= f.submit "新規登録" %>
+        <div class="text-center">
+          <%= f.submit "新規登録", class: "btn btn-success" %>
         </div>
       <% end %>
       </div>
