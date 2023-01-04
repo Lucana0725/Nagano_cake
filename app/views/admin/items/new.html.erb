@@ -66,6 +66,15 @@
             <th class="mr-5"><%= f.label :price, "税抜価格" %></th>
             <td><%= f.text_field :price, :placeholder => "1000" %>円</td>
           </tr>
+          <tr>
+            <th class="mr-5"><%= f.label :is_active, "販売ステータス" %></th>
+            <td>
+              <%= f.radio_button :is_active, true %>
+              <%= f.label :is_active_true, "販売中" %>
+              <%= f.radio_button :is_active, false %>
+              <%= f.label :is_active_false, "販売停止中" %>
+            </td>
+          </tr>
         </table>
         <div class="text-center">
           <%= f.submit "新規登録", class: "btn btn-success" %>
