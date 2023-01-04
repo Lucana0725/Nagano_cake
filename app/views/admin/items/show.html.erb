@@ -35,11 +35,16 @@
             <th>税込価格</th>
             <td><%= @item.get_tax_in_price.to_s(:delimited) %> (<%= @item.price.to_s(:delimited) %>) 円</td>
         </tr>
+        <tr>
+          <td></td>
+          <td>
+            <%= link_to "編集する", edit_admin_item_path(@item.id), class: "btn btn-success" %>
+          </td>
+        </tr>
       </table>
       
     </div>
     
-    <%= link_to "編集する", edit_admin_item_path(@item.id), class: "btn btn-success" %>
   </div>
   <!--items_controllerで定義した@itemに、画像表示のget_item_imageと以下表示させたいカラムを渡す-->
 </div>
