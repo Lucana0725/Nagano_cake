@@ -2,14 +2,20 @@
 <!--  <h2>商品一覧（全%= item.count %>件）</h2>-->
 <!--% end %>-->
 <!--<h2>商品一覧（全%= @items.count %>件）</h2>-->
-<h2>商品一覧<span style="font-size:20px;">（全<%= @items.count %>件）</span></h2>
-<% @items.each do |item| %>
-  <div>
-    <!--itemのidを渡していないと飛び先がわからないため-->
-    <%= link_to item_path(item.id) do %>
-      <%= image_tag item.get_item_image(300, 300) %><br/>
-      <%= item.name %><br/>
-    <% end %>
-    ￥<%= item.get_tax_in_price.to_s(:delimited) %>（税込）<br/>
+<div class="container pt-3">
+  <div class="row mt-3">
+    <h2>商品一覧<span style="font-size:20px;">（全<%= @items.count %>件）</span></h2>
   </div>
-<% end %>
+  <div class="row">
+    <% @items.each do |item| %>
+      <div class="col">
+        <!--itemのidを渡していないと飛び先がわからないため-->
+        <%= link_to item_path(item.id) do %>
+          <%= image_tag item.get_item_image(300, 300) %><br/>
+          <%= item.name %><br/>
+        <% end %>
+        ￥<%= item.get_tax_in_price.to_s(:delimited) %>（税込）<br/>
+      </div>
+    <% end %>
+  </div>
+</div>
