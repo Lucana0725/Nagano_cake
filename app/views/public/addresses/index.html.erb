@@ -1,51 +1,76 @@
-<!--<h1>Public::Addresses#index</h1>-->
-<!--<p>Find me in app/views/public/addresses/index.html.erb</p>-->
-<h2>配送先登録 / 一覧</h2>
-
-<%= form_with model: @address, url: addresses_path, method: :post do |f| %>
-  <%= f.label :postal_code, "郵便番号（ハイフンなし）" %>
-  <%= f.text_field :postal_code %></br>
-
-  <%= f.label :address, "住所" %>
-  <%= f.text_field :address %></br>
-
-  <%= f.label :name, "宛名" %>
-  <%= f.text_field :name %>
-
-  <%= f.submit "新規登録" %>
-<% end %>
-
-<table>
-  <thead>
-    <tr>
-      <th>郵便番号</th>
-      <th>住所</th>
-      <th>宛名</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @addresses.each do |address| %>
-    <tr>
-      <td>
-        <%= address.postal_code %>
-      </td>
-      <td>
-        <%= address.address %>
-      </td>
-      <td>
-        <%= address.name %>
-      </td>
-      <td>
-        <!--%= link_to "編集する", address_edit_path %>-->
-        <%= link_to "編集する", edit_address_path(address.id) %>
-
-        <%= link_to "削除する", address_path(address.id), method: :delete, "data-confirm" => "この配送先を削除します。よろしいですか？" %>
-        <!--%= form_with model: @address, url: address_path(address.id), method: :delete do |f| %>-->
-        <!--  %= f.submit "削除する", "data-confirm" => "この配送先を削除します。よろしいですか？" %>-->
-        <!--% end %>-->
-      </td>
-    </tr>
+<div class="container">
+  <div class="row">
+    <h2>配送先登録 / 一覧</h2>
+  </div>
+  <div class="row">
+    <%= form_with model: @address, url: addresses_path, method: :post do |f| %>
+      <table class="table table-borderless">
+        <tr>
+          <th><%= f.label :postal_code, "郵便番号（ハイフンなし）" %></th>
+          <td><%= f.text_field :postal_code %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :address, "住所" %></th>
+          <td><%= f.text_field :address %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :name, "宛名" %></th>
+          <td><%= f.text_field :name %></td>
+          <td><%= f.submit "新規登録", class: "btn btn-success" %></td>
+        </tr>
+      </table>
     <% end %>
-  </tbody>
-</table>
+
+    <!--%= form_with model: @address, url: addresses_path, method: :post do |f| %>-->
+    <!--  %= f.label :postal_code, "郵便番号（ハイフンなし）" %>-->
+    <!--  %= f.text_field :postal_code %></br>-->
+
+    <!--  %= f.label :address, "住所" %>-->
+    <!--  %= f.text_field :address %></br>-->
+
+    <!--  %= f.label :name, "宛名" %>-->
+    <!--  %= f.text_field :name %>-->
+
+    <!--  %= f.submit "新規登録" %>-->
+    <!--% end %>-->
+  </div>
+
+  <div class="row">
+    <div class="col-10">
+      <table class="table table-bordered">
+        <thead class="bg-light">
+          <tr>
+            <th>郵便番号</th>
+            <th>住所</th>
+            <th>宛名</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @addresses.each do |address| %>
+          <tr>
+            <td>
+              <%= address.postal_code %>
+            </td>
+            <td>
+              <%= address.address %>
+            </td>
+            <td>
+              <%= address.name %>
+            </td>
+            <td class="col-4 text-center">
+              <!--%= link_to "編集する", address_edit_path %>-->
+              <%= link_to "編集する", edit_address_path(address.id), class: "btn btn-success" %>
+
+              <%= link_to "削除する", address_path(address.id), method: :delete, "data-confirm" => "この配送先を削除します。よろしいですか？", class: "btn btn-danger" %>
+              <!--%= form_with model: @address, url: address_path(address.id), method: :delete do |f| %>-->
+              <!--  %= f.submit "削除する", "data-confirm" => "この配送先を削除します。よろしいですか？" %>-->
+              <!--% end %>-->
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

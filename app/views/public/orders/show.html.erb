@@ -2,7 +2,7 @@
   <div class="row mt-3">
     <h2>注文履歴詳細</h2>
   </div>
-  
+
   <div class="row mt-4">
     <div class="col-8">
       <h3>注文情報</h3>
@@ -53,7 +53,7 @@
       </table>
     </div>
   </div>
-  
+
   <div class="row mt-3">
     <div class="col-12">
       <h3>注文内容</h3>
@@ -73,13 +73,13 @@
           <tr>
             <!--商品-->
             <td><%= order_detail.item.name %></td>
-      
+
             <!--単価（税込み）-->
             <td><%= order_detail.price_with_tax.to_s(:delimited) %></td>
-      
+
             <!--個数-->
             <td><%= order_detail.amount %></td>
-      
+
             <!--小計-->
             <td><%= (order_detail.price_with_tax * order_detail.amount).to_s(:delimited) %></td>
           </tr>
