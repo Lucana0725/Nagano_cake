@@ -1,33 +1,70 @@
-<h2>会員情報編集</h2>
-<%= form_with model: @customer, url: customers_path, method: :patch do |f| %>
-  <div>
-    <%= f.label :name, "氏名" %>
-    <%= f.text_field :last_name %>
-    <%= f.text_field :first_name %>
-  </div>
-  <div>
-    <%= f.label :name, "カナ" %>
-    <%= f.text_field :last_name_kana %>
-    <%= f.text_field :first_name_kana %>
-  </div>
-  <div>
-    <%= f.label :postal_code, "郵便番号" %>
-    <%= f.text_field :postal_code %>
-  </div>
-  <div>
-    <%= f.label :address, "住所" %>
-    <%= f.text_field :address %>
-  </div>
-  <div>
-    <%= f.label :telephone_number, "電話番号" %>
-    <%= f.text_field :telephone_number %>
-  </div>
-  <div>
-    <%= f.label :email, "メールアドレス" %>
-    <%= f.text_field :email %>
+<div class="container pt-3">
+  <div class="row mt-3">
+    <h2>会員情報編集</h2>
   </div>
   
-  <%= f.submit "編集内容を保存" %>
-<% end %>
+  <div class="row mt-3">
+    <div class="col-12"></div>
+    <%= form_with model: @customer, url: customers_path, method: :patch do |f| %>
+      <table class="table table-borderless">
+        <tr>
+          <th><%= f.label :name, "氏名" %></th>
+          <td><%= f.text_field :last_name %></td>
+          <td><%= f.text_field :first_name %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :name, "カナ" %></th>
+          <td><%= f.text_field :last_name_kana %></td>
+          <td><%= f.text_field :first_name_kana %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :postal_code, "郵便番号" %></th>
+          <td><%= f.text_field :postal_code %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :address, "住所" %></th>
+          <td><%= f.text_field :address, class: "col-12" %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :telephone_number, "電話番号" %></th>
+          <td><%= f.text_field :telephone_number %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :email, "メールアドレス" %></th>
+          <td><%= f.text_field :email %></td>
+        </tr>
+      </table>
+  </div>
+    
+    <%= f.submit "編集内容を保存", class: "btn btn-success mr-5" %>
+  <% end %>
+  
+  <%= link_to "退会する", unsubscribe_path, class: "btn btn-danger" %>
+</div>
 
-<%= link_to "退会する", unsubscribe_path %>
+      <!--<div>-->
+      <!--  %= f.label :name, "氏名" %>-->
+      <!--  %= f.text_field :last_name %>-->
+      <!--  %= f.text_field :first_name %>-->
+      <!--</div>-->
+      <!--<div>-->
+      <!--  %= f.label :name, "カナ" %>-->
+      <!--  %= f.text_field :last_name_kana %>-->
+      <!--  %= f.text_field :first_name_kana %>-->
+      <!--</div>-->
+      <!--<div>-->
+      <!--  %= f.label :postal_code, "郵便番号" %>-->
+      <!--  %= f.text_field :postal_code %>-->
+      <!--</div>-->
+      <!--<div>-->
+      <!--  %= f.label :address, "住所" %>-->
+      <!--  %= f.text_field :address %>-->
+      <!--</div>-->
+      <!--<div>-->
+      <!--  %= f.label :telephone_number, "電話番号" %>-->
+      <!--  %= f.text_field :telephone_number %>-->
+      <!--</div>-->
+      <!--<div>-->
+      <!--  %= f.label :email, "メールアドレス" %>-->
+      <!--  %= f.text_field :email %>-->
+      <!--</div>-->
