@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="mx-auto col-11">
+    <div class="mx-auto">
       <!--<p>ようこそ、ながのCAKEへ！</p>-->
       <!--<p>このサイトは、ケーキ販売のECサイトです。</p>-->
       <!--<p>会員でない方も商品の閲覧はできますが、</p>-->
@@ -8,28 +8,42 @@
       
       <div class="card">
         <%= image_tag "cake-header", class: "card-img" %>
-        <div class="col-5 mx-auto card-img-overlay text-white">
-          ようこそ、ながのCAKEへ！</br>
-          このサイトは、ケーキ販売のECサイトです。</br>
-          会員でない方も商品の閲覧はできますが、</br>
-          購入には会員登録が必要になります。
+        <div class="col-5 mx-auto card-img-overlay d-flex align-items-center">
+          <div class="bg-light">
+            ようこそ、ながのCAKEへ！</br>
+            このサイトは、ケーキ販売のECサイトです。</br>
+            会員でない方も商品の閲覧はできますが、</br>
+            購入には会員登録が必要になります。
+          </div>
         </div>
       </div>
-
-      <div class="row">
-        <h2>新着商品</h2>
-      </div>
-      <div class="row">
-        <% @items.each do |item| %>  <!--homes#topで取ってきた@itemsに対してeach-->
-            <%= link_to item_path(item.id) do %>
-              <%= image_tag item.get_item_image(100, 100) %></br>
-              <%= item.name %></br>
-            <% end %>
-            ￥<%= item.get_tax_in_price.to_s(:delimited) %>（税込）</br>
-          <% end %>
-      </div>
-
-      <%= link_to "全ての商品を見る>", items_path %>
     </div>
   </div>
+
+  <div class="row mt-3">
+    <div>
+      <h2>新着商品</h2>
+    </div>
+  </div>
+  <div class="row">
+    <% @items.each do |item| %>  <!--homes#topで取ってきた@itemsに対してeach-->
+    <div class="col mx-auto">
+      <%= link_to item_path(item.id) do %>
+        <%= image_tag item.get_item_image(270, 220) %></br>
+        <%= item.name %></br>
+      <% end %>
+      ￥<%= item.get_tax_in_price.to_s(:delimited) %>（税込）</br>
+    </div>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="text-right">
+        <%= link_to "全ての商品を見る>", items_path %>
+      </div>
+    </div>
+  </div>
+    <!--</div>-->
+  <!--</div>-->
 </div>
