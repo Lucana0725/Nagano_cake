@@ -16,11 +16,12 @@
     <header>
       <nav class="navbar navbar-expand-lg navbar-dark bg-light">
         <div class="container">
+          <%= link_to root_path, class: "navbar-brand text-dark" do %>
+            <span>LOGO</span>
+          <% end %>
           <div class="row">
             <% if customer_signed_in? %>
-              <!--<p>ようこそ、ダーヤマさん！</p>-->
-              <!--<p>ようこそ、%= customer.last_name(current_customer) %>さん！</p>-->
-              <p>ようこそ、<%= current_customer.last_name %>さん！</p>
+              <span>ようこそ、<%= current_customer.last_name %>さん！</span>
             <% end %>
           </div>
             

@@ -1,10 +1,26 @@
-<h2>本当に退会しますか？</h2>
-<p>退会すると、会員登録情報や</p>
-<p>これまでの購入履歴が閲覧できなくなります。</p>
-<p>退会する場合は、「退会する」をクリックしてください。</p>
+<div class="container -t-3">
+  <div class="row mt-5">
+    <div class="mx-auto">
+      <h2>本当に退会しますか？</h2>
+    </div>
+  </div>
 
-<%= link_to "退会しない", customer_edit_path %>
-<%= link_to "退会する", withdrawal_path, method: :patch, "data-confirm" => "本当に退会しますか？" %>
+  <div class="row mt-4">
+    <div class="mx-auto">
+      <div class="text-center">退会すると、会員登録情報や</div>
+      <div class="text-center">これまでの購入履歴が閲覧できなくなります。</div>
+      <div class="text-center">退会する場合は、「退会する」をクリックしてください。</div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="mx-auto">
+      <%= link_to "退会しない", customer_edit_path, class: "mr-5 btn btn-primary" %>
+      <%= link_to "退会する", withdrawal_path, method: :patch, "data-confirm" => "本当に退会しますか？", class: "btn btn-danger" %>
+    </div>
+  </div>
+</div>
+
 <!--%= form_with model: @customer, url: withdrawal_path, method: :patch do |f| %>-->
 <!--  %= f.submit "退会する" %>-->
 <!--% end %>-->

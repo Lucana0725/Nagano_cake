@@ -1,78 +1,91 @@
-<h2>注文履歴詳細</h2>
+<div class="container pt-3">
+  <div class="row mt-3">
+    <h2>注文履歴詳細</h2>
+  </div>
 
-<h3>注文情報</h3>
-<table>
-  <tr>
-    <th>注文日</th>
-    <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
-  </tr>
-  <tr>
-    <th>配送先</th>
-    <td>
-      〒<%= @order.postal_code %></br>
-      <%= @order.address %></br>
-      <%= @order.name %>
-    </td>
-  </tr>
-  <tr>
-    <th>支払方法</th>
-    <td><%= @order.payment_method_i18n %></td>
-  </tr>
-  <tr>
-    <th>ステータス</th>
-    <td><%= @order.order_status_i18n %></td>
-  </tr>
-</table>
+  <div class="row mt-4">
+    <div class="col-8">
+      <h3>注文情報</h3>
+      <table class="table table-bordered">
+        <tr>
+          <th class="bg-light">注文日</th>
+          <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+        </tr>
+        <tr>
+          <th class="bg-light align-middle">配送先</th>
+          <td>
+            〒<%= @order.postal_code %></br>
+            <%= @order.address %></br>
+            <%= @order.name %>
+          </td>
+        </tr>
+        <tr>
+          <th class="bg-light">支払方法</th>
+          <td><%= @order.payment_method_i18n %></td>
+        </tr>
+        <tr>
+          <th class="bg-light">ステータス</th>
+          <td><%= @order.order_status_i18n %></td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-4 text-right">
+      <h3 class="text-left">請求情報</h3>
+      <table class="table table-bordered text-left">
+        <tr>
+          <th class="bg-light">商品合計</th>
+          <td>
+            <!--Oderモデルに紐づいているOrderDetailモデルが"price_with_tax"という購入時税込み価格をカラムとして持っているのでそれを使ってオーダー時の商品合計を求める。-->
+            <% @order.order_details.each do |order_detail| %>  <!--OrderとOrderDetailは1対Nの関係なので、Orderに入っている全てのOrderDetailに対して(each)-->
+              <% @ordered_total_price += (order_detail.price_with_tax * order_detail.amount) %>  <!--コントローラーで定義した@ordered_total_priceという変数に、OrderDetailが持つ"price_with_tax(単価)"に"amount"を掛け、足し合わせてあげる-->
+            <% end %>
+            <%= @ordered_total_price.to_s(:delimited) %>  <!--上で足し合わせた@ordered_total_priceをここで表示させる。上(each内)で表示させてしまうと、各商品毎のトータル(A:2個、B:3個だとすると今回ほしいのは(A*2)+(B*3)なのに、(A*2),(B*3)という独立した金額が出てしまうため。)-->
+          </td>
+        </tr>
+        <tr>
+          <th class="bg-light">配送料</th>
+          <td><%= @order.postage %></td>
+        </tr>
+        <tr>
+          <th class="bg-light">ご請求金額</th>
+          <td><%= (@ordered_total_price + @order.postage).to_s(:delimited) %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
 
-<h3>請求情報</h3>
-<table>
-  <tr>
-    <th>商品合計</th>
-    <td>
-      <!--Oderモデルに紐づいているOrderDetailモデルが"price_with_tax"という購入時税込み価格をカラムとして持っているのでそれを使ってオーダー時の商品合計を求める。-->
-      <% @order.order_details.each do |order_detail| %>  <!--OrderとOrderDetailは1対Nの関係なので、Orderに入っている全てのOrderDetailに対して(each)-->
-        <% @ordered_total_price += (order_detail.price_with_tax * order_detail.amount) %>  <!--コントローラーで定義した@ordered_total_priceという変数に、OrderDetailが持つ"price_with_tax(単価)"に"amount"を掛け、足し合わせてあげる-->
-      <% end %>
-      <%= @ordered_total_price.to_s(:delimited) %>  <!--上で足し合わせた@ordered_total_priceをここで表示させる。上(each内)で表示させてしまうと、各商品毎のトータル(A:2個、B:3個だとすると今回ほしいのは(A*2)+(B*3)なのに、(A*2),(B*3)という独立した金額が出てしまうため。)-->
-    </td>
-  </tr>
-  <tr>
-    <th>配送料</th>
-    <td><%= @order.postage %></td>
-  </tr>
-  <tr>
-    <th>ご請求金額</th>
-    <td><%= (@ordered_total_price + @order.postage).to_s(:delimited) %></td>
-  </tr>
-</table>
+  <div class="row mt-3">
+    <div class="col-12">
+      <h3>注文内容</h3>
+      <table class="table table-bordered">
+        <thead class="bg-light">
+          <tr>
+            <th>商品</th>
+            <th>単価（税込）</th>
+            <th>個数</th>
+            <th>小計</th>
+          </tr>
+        </thead>
+        <tbody>
+           <!--"商品名","単価（税込）","個数","小計"だから@order_details.eachだろ～！と思うとドツボはまる。そうすると(一つ一つの注文内容(「1オーダーごと」ではなく、「一つひとつの注文内容」)が出てきてしまう。)-->
+           <!--ココでほしいのは、「1オーダーの内容」であるので、@order.order_details.eachとなる。-->
+          <% @order.order_details.each do |order_detail| %>
+          <tr>
+            <!--商品-->
+            <td><%= order_detail.item.name %></td>
 
-<h3>注文内容</h3>
-<table>
-  <thead>
-    <tr>
-      <th>商品</th>
-      <th>単価（税込）</th>
-      <th>個数</th>
-      <th>小計</th>
-    </tr>
-  </thead>
-  <tbody>
-     <!--"商品名","単価（税込）","個数","小計"だから@order_details.eachだろ～！と思うとドツボはまる。そうすると(一つ一つの注文内容(「1オーダーごと」ではなく、「一つひとつの注文内容」)が出てきてしまう。)-->
-     <!--ココでほしいのは、「1オーダーの内容」であるので、@order.order_details.eachとなる。-->
-    <% @order.order_details.each do |order_detail| %>
-    <tr>
-      <!--商品-->
-      <td><%= order_detail.item.name %></td>
+            <!--単価（税込み）-->
+            <td><%= order_detail.price_with_tax.to_s(:delimited) %></td>
 
-      <!--単価（税込み）-->
-      <td><%= order_detail.price_with_tax.to_s(:delimited) %></td>
+            <!--個数-->
+            <td><%= order_detail.amount %></td>
 
-      <!--個数-->
-      <td><%= order_detail.amount %></td>
-
-      <!--小計-->
-      <td><%= (order_detail.price_with_tax * order_detail.amount).to_s(:delimited) %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+            <!--小計-->
+            <td><%= (order_detail.price_with_tax * order_detail.amount).to_s(:delimited) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
