@@ -2,7 +2,7 @@
   <div class="row mt-3">
     <h2>会員情報編集</h2>
   </div>
-  
+
   <div class="row mt-3">
     <div class="col-12"></div>
     <%= form_with model: @customer, url: customers_path, method: :patch do |f| %>
@@ -35,10 +35,10 @@
         </tr>
       </table>
   </div>
-    
+
     <%= f.submit "編集内容を保存", class: "btn btn-success mr-5" %>
   <% end %>
-  
+
   <%= link_to "退会する", unsubscribe_path, class: "btn btn-danger" %>
 </div>
 
